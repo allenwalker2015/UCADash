@@ -21,7 +21,8 @@ public class Tubos {
         private Sound sound= new Sound("mb_touch.wav");
 	Random rnd = new Random();						//used to generate a random height for						//used to generate a random height for dat gap
 	int x ;											//the x position of the wall, always changing (right to left)
-	int y = rnd.nextInt(100) + 400;	//generates the y value that is the top of the bottom wall
+	int initX;
+        int y = rnd.nextInt(100) + 400;	//generates the y value that is the top of the bottom wall
 	static int speed = - 6;							//scrolling speed
 	int WIDTH = 50;									//width of a wall, it's a constant 
 	int height = Juego.HEIGHT - 200;					//height of the wall, just the height of the window - how high the wall is
@@ -32,11 +33,12 @@ public class Tubos {
 			img = ImageIO.read(new File("tubo2.png"));
 					
 		} catch (IOException e) {
-			System.out.println("WRONG WALL");		//prints "WRONG WALL" if there's trouble with Imgur
+			System.out.println("No sirve el tubo");		//prints "WRONG WALL" if there's trouble with Imgur
 		}}
 	
 	public Tubos(int i){								//allows me to differentiate the x positions of the two walls
 		this.x = i;
+                initX=i;
 	}
 	
 	//draws the wall
@@ -63,9 +65,9 @@ public class Tubos {
 			
 		//pushes the wall back to just off screen on the right when it gets offscreen on the left (the loop)
 		if (x <= 0 - WIDTH){
-			x = Juego.WIDTH;
+			x= initX;
 			y = rnd.nextInt(Juego.HEIGHT - 400) + 300;
-			height = Juego.HEIGHT - y;
+			height = Juego.HEIGHT;
 		}		
 	}
 	

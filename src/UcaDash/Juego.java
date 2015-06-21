@@ -25,7 +25,7 @@ public class Juego extends JPanel{
         Moneda moneda1 = new Moneda(WIDTH - WIDTH/2);
         Moneda moneda2 = new Moneda(WIDTH + WIDTH/2);
         Moneda moneda3 = new Moneda(WIDTH + WIDTH/2 + WIDTH/6);
-        //private Sound sound= new Sound("background.wav");
+        private Sound sound= new Sound("background.wav");
         int Score=0;
 	static int monedas = 0;						
 	static int scrollX = 0;						
@@ -40,8 +40,8 @@ public class Juego extends JPanel{
 	}}
 	
    public Juego(){
-		//sound.seek();
-                mp3.play();
+		sound.seek();
+                //mp3.play();
 		//this mouseAdapter just listens for clicks, whereupon it then tells the bird to jump 
 		this.addMouseListener(new MouseAdapter(){
  
