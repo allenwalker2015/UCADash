@@ -1,6 +1,6 @@
 package Graficos;
  
-import Niveles.Juego;
+import Niveles.Nivel1;
 import UcaDash.Sound;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -16,8 +16,8 @@ public class Personaje {
         Sound sound;
 	static int ANCHO = 30;									//Diameter of the bird
 	static int ALTO =64;
-        public static int X = 40;		//The x position of the bird. Does not change at any time. Should be exactly centered  
-	static int y =  Juego.HEIGHT - 60 - 64;							//The STARTING y position of the bird. Will change constantly
+        public static int X = -40;		//The x position of the bird. Does not change at any time. Should be exactly centered  
+	static int y =  Nivel1.HEIGHT - 60 - 64;							//The STARTING y position of the bird. Will change constantly
 	static int acceleration = 1;								//Used in the gravity simulation below
 	static int speed = 2; //The speed at which the bird will fall (constantly increased by acceleration (1) )
         static File imgload;
@@ -56,7 +56,7 @@ public class Personaje {
 	
 	//all movement stuff is here 
 	public static void move(){
-	
+                    if(X <60)X++;
 		//only moves if the bird is between the top and bottom of the window
                     if(y<=450 || wantjumpping){
 			speed += acceleration;								//Here's the gravity I was talking about the speed is just increased by 1 all the time, even after a jump
@@ -66,7 +66,7 @@ public class Personaje {
                         //y= round(y);
                         //The actual movement, y location equals (where it was) + (how far it should go)
 		
-               //if (y==Juego.HEIGHT-150)acceleration=0;
+               //if (y==Nivel1.HEIGHT-150)acceleration=0;
 		//reset();											//rests bird's postion, actual method below
 		//Game.dead = true;
                 }//bird is dead! This is used in the Main method to reset the walls after a death
@@ -77,17 +77,18 @@ public class Personaje {
 	
 	
 	public static void reset(){									//called after the bird dies
-		y = -100;
-                X = 40;//resets position, speed, etc.
-		speed = 1;
-		Juego.monedas = 0;
 		
-		Juego.deathMessage = "Has muerto, antes de completar el nivel :(";				//also shows this lovely message
+                X = -40;//resets position, speed, etc.
+		speed = 1;
+                y =  Nivel1.HEIGHT - 60 - 64;
+		Nivel1.monedas = 0;
+		;
+		Nivel1.deathMessage = "Has muerto, antes de completar el nivel :(";				//also shows this lovely message
 		
 		//This timer just makes the message dissapear after 3000 milliseconds
 		Timer deathTimer = new Timer(3000, new ActionListener(){
 			  public void actionPerformed(ActionEvent event){
-				Juego.deathMessage = "";
+				Nivel1.deathMessage = "";
 			 };
 		});
 		
@@ -95,7 +96,8 @@ public class Personaje {
 	}
 	
 	public static void paint(Graphics g){	
-		g.drawImage(img, X, y, null);							//paints the bird's icon
+		g.drawImage(img, X, y, null);
+                g.drawRect(X, y,ANCHO, ALTO);//paints the bird's icon
 	}
 	
 	public static Rectangle getBounds(){

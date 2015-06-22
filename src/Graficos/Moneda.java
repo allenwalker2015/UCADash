@@ -1,6 +1,6 @@
 package Graficos;
  
-import Niveles.Juego;
+import Niveles.Nivel1;
 import UcaDash.Sound;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -13,7 +13,7 @@ public class Moneda{
         private Sound sound= new Sound(getClass().getResource("/Sonidos/coin.wav").getPath());
 	Random rnd = new Random();						//used to generate a random height for						//used to generate a random height for dat gap
 	int x ;											//the x position of the wall, always changing (right to left)
-	int y =  rnd.nextInt(((Juego.HEIGHT-80) - 300) + 1) + 300;	//generates the y value that is the top of the bottom wall
+	int y =  rnd.nextInt(((Nivel1.HEIGHT-80) - 300) + 1) + 300;	//generates the y value that is the top of the bottom wall
 	static int speed = - 6;	
         public boolean get = false;//scrolling speed
         public  int coin = 0;
@@ -32,9 +32,12 @@ public class Moneda{
 	
 	//draws the wall
 	public void paint(Graphics g){
-                if(!get)
-		g.drawImage(img, x, y, null);								//top part 
-		//g.drawImage(img, x, ( -Juego.HEIGHT ) + ( y - GAP), null);	//bottom part
+                if(!get){
+		g.drawImage(img, x, y, null);	
+                g.drawRect(x, y, WIDTH,height);
+                }
+                //top part 
+		//g.drawImage(img, x, ( -Nivel1.HEIGHT ) + ( y - GAP), null);	//bottom part
 	}
 
 	public void move(){
@@ -43,7 +46,7 @@ public class Moneda{
 	
 		//These Rectanlges are used to detect collisions
 		Rectangle coinBounds = new Rectangle(x, y, WIDTH, height);
-		//Rectangle wallBoundsTop = new Rectangle(x, 0, WIDTH, Juego.HEIGHT - (height + GAP));
+		//Rectangle wallBoundsTop = new Rectangle(x, 0, WIDTH, Nivel1.HEIGHT - (height + GAP));
 		
 		//If birdman collids with a wall, he dies and  the game, bird, and walls are all reset
 		if (coinBounds.intersects(Personaje.getBounds())) {
@@ -56,9 +59,9 @@ public class Moneda{
 			
 		//pushes the wall back to just off screen on the right when it gets offscreen on the left (the loop)
 		if (x <= 0 - WIDTH){
-			x = Juego.WIDTH;
+			x = Nivel1.WIDTH;
                         get=false;
-			y = rnd.nextInt(((Juego.HEIGHT-80) - 300) + 1) + 300;
+			y = rnd.nextInt(((Nivel1.HEIGHT-80) - 300) + 1) + 300;
 			
 		}		
 	}

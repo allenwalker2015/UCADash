@@ -22,7 +22,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 public class Sound {
     File soundFile;
     AudioInputStream audioIn;
-    Clip clip;
+    public Clip clip;
     public Sound(String filename){ 
         try {
             soundFile = new File(filename);

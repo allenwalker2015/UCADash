@@ -1,6 +1,7 @@
 package Niveles;
  
 import Graficos.Fondo;
+import Graficos.Koopa;
 import Graficos.Moneda;
 import Graficos.Personaje;
 import Graficos.Tubos;
@@ -17,12 +18,16 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
  
 @SuppressWarnings({"serial", "empty-statement"})
-public class Juego extends JPanel{
+public class Nivel1 extends JPanel{
 	
 	public static int HEIGHT = 600;						
-	public static int WIDTH = 800;		
+	public static int WIDTH = 800;
+        int GOAL= 3;
         Fondo fondo = new Fondo();
-	Personaje personaje = new Personaje();					
+	Personaje personaje = new Personaje();	
+        Koopa koopa1 = new Koopa(WIDTH + 50);
+        Koopa koopa2 = new Koopa(WIDTH + (WIDTH / 4) + 50);
+        Koopa koopa3 = new Koopa(WIDTH + (WIDTH / 2) + 50);
 	Tubos wall = new Tubos(WIDTH);				
 	Tubos wall2 = new Tubos(WIDTH + (WIDTH / 4));	
         Tubos wall3 = new Tubos(WIDTH + (WIDTH / 2));
@@ -32,6 +37,7 @@ public class Juego extends JPanel{
         Moneda moneda3 = new Moneda(WIDTH + WIDTH/2 + WIDTH/6);
         private Sound sound= new Sound(getClass().getResource("/Sonidos/background.wav").getPath());
         int Score=0;
+        public boolean Win=false;
 	public static int monedas = 0;						
 	public static int scrollX = 0;						
 	public static boolean dead = false;					
@@ -44,7 +50,7 @@ public class Juego extends JPanel{
 		System.out.println("No carga el piso :(");		//prints "WRONG BACKGROUND" if there is an issue obtaining the background
 	}}
 	
-   public Juego(){
+   public Nivel1(){
 		sound.seek();
                 //mp3.play();
 		//this mouseAdapter just listens for clicks, whereupon it then tells the bird to jump 
@@ -72,6 +78,9 @@ public class Juego extends JPanel{
 		moneda1.paint(g);               //dibuja una moneda aleatoria
 		moneda2.paint(g);
                 moneda3.paint(g);
+                koopa1.paint(g);                //Dibuja los koopas
+                koopa3.paint(g);
+                koopa2.paint(g);
                 wall.paint(g);			//dibuja el primer tubo
                 wall2.paint(g);                 //dibuja el segundo tubo
                 wall3.paint(g);//dibuja el tercer tubo
@@ -87,13 +96,16 @@ public class Juego extends JPanel{
 	@SuppressWarnings("static-access")
 	public void move(){
             fondo.move();
+            
             moneda1.move();   //hace el respectivo movimiento de la moneda
             moneda2.move();
             moneda3.move();
             wall.move();	 //hace el respectivo movimiento de el tubo
             wall2.move();
             wall3.move();
-            
+            koopa1.move();
+            koopa2.move();
+            koopa3.move();
             procesarMonedas(); //Se encarga de sumar las monedas si se obtienen y crear nuevas monedas
             notover(); //Verifica que la monedas no esten encimadas en un obstaculo
             personaje.move();//mueve el personaje
@@ -118,13 +130,13 @@ public class Juego extends JPanel{
                 
 	}
         public void notover(){
-             while(moneda1.getBounds().intersects(new Rectangle(HEIGHT - 84,0,800,84)) |moneda1.getBounds().intersects(wall.getBounds()) | moneda1.getBounds().intersects(wall2.getBounds()) | moneda1.getBounds().intersects(wall3.getBounds())){
+             while(moneda1.getBounds().intersects(new Rectangle(HEIGHT - 100,0,800,84)) |moneda1.getBounds().intersects(wall.getBounds()) | moneda1.getBounds().intersects(wall2.getBounds()) | moneda1.getBounds().intersects(wall3.getBounds())){
                 moneda1 = new Moneda(WIDTH + WIDTH/2);
                 }    
-            while(moneda2.getBounds().intersects(new Rectangle(HEIGHT - 84,0,800,84)) |moneda2.getBounds().intersects(wall.getBounds()) | moneda2.getBounds().intersects(wall2.getBounds()) | moneda2.getBounds().intersects(wall3.getBounds())){
+            while(moneda2.getBounds().intersects(new Rectangle(HEIGHT - 100,0,800,84)) |moneda2.getBounds().intersects(wall.getBounds()) | moneda2.getBounds().intersects(wall2.getBounds()) | moneda2.getBounds().intersects(wall3.getBounds())){
                 moneda2 = new Moneda(WIDTH + WIDTH/2 + WIDTH/4);
                 }
-            while(moneda3.getBounds().intersects(new Rectangle(HEIGHT - 84,0,800,84)) |moneda3.getBounds().intersects(wall.getBounds()) | moneda3.getBounds().intersects(wall2.getBounds()) | moneda3.getBounds().intersects(wall3.getBounds())){
+            while(moneda3.getBounds().intersects(new Rectangle(HEIGHT - 100,0,800,84)) |moneda3.getBounds().intersects(wall.getBounds()) | moneda3.getBounds().intersects(wall2.getBounds()) | moneda3.getBounds().intersects(wall3.getBounds())){
                 moneda3 = new Moneda(WIDTH + WIDTH/2 +2*WIDTH/4);
                 }
                
@@ -134,5 +146,6 @@ public class Juego extends JPanel{
             if(moneda1.get) moneda1= new Moneda(WIDTH + WIDTH/2); //si se obtubo la moneda se crea otro nuevo objeto del tipo moneda
             if(moneda2.get) moneda2= new Moneda(WIDTH + WIDTH/2 + WIDTH/4);
             if(moneda3.get) moneda3= new Moneda(WIDTH + WIDTH/2 +2*WIDTH/4);
+            if(monedas==GOAL){ Win=true;sound.clip.stop();};
             }
 }
