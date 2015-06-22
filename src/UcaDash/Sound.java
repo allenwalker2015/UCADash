@@ -19,7 +19,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
  *
  * @author KevinAlexander
  */
-class Sound {
+public class Sound {
     File soundFile;
     AudioInputStream audioIn;
     Clip clip;

@@ -1,5 +1,6 @@
 package UcaDash;
  
+import Niveles.Juego;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;

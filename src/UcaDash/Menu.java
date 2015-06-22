@@ -25,7 +25,7 @@ public class Menu extends JPanel{
 	//gets the background from imgur
 	static BufferedImage img = null;{
 		try {
-			img = ImageIO.read(new File("menu.bmp"));
+			img = ImageIO.read(new File(getClass().getResource("/Imagenes/menu.bmp").getPath()));
 		} catch (IOException e) {
 			System.out.println("WRONG MENU");
 		}}
@@ -35,7 +35,7 @@ public class Menu extends JPanel{
 	
 	public Menu(){
 		setFocusable(true);
-                sound = new Sound("menu.wav");
+                sound = new Sound(getClass().getResource("/Sonidos/menu.wav").getPath());
                 //waits for a mouseclick, then toggles startGame
 		addMouseListener(new MouseAdapter(){
 			@Override
