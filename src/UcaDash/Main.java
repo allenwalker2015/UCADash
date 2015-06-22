@@ -36,7 +36,7 @@ import javax.swing.Timer;
 		while (menu.startGame == false){			//waits until the mouse is clicked in the Menu
 			Thread.sleep(10);
 		}
-		Timer animationTimer = new Timer(20, new ActionListener(){		//animation timer for the game, repaints the bird, walls, and background every 20 milliseconds
+		Timer animationTimer = new Timer(30, new ActionListener(){		//animation timer for the game, repaints the bird, walls, and background every 20 milliseconds
 			  public void actionPerformed(ActionEvent event){
                                  game.repaint();
 				 game.move();

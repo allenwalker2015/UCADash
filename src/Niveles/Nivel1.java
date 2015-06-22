@@ -146,6 +146,6 @@ public class Nivel1 extends JPanel{
             if(moneda1.get) moneda1= new Moneda(WIDTH + WIDTH/2); //si se obtubo la moneda se crea otro nuevo objeto del tipo moneda
             if(moneda2.get) moneda2= new Moneda(WIDTH + WIDTH/2 + WIDTH/4);
             if(moneda3.get) moneda3= new Moneda(WIDTH + WIDTH/2 +2*WIDTH/4);
-            if(monedas==GOAL){ Win=true;sound.clip.stop();};
+            //if(monedas==GOAL){ Win=true;sound.clip.stop();};
             }
 }
