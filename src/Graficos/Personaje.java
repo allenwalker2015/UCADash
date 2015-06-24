@@ -1,6 +1,6 @@
 package Graficos;
  
-import Niveles.Nivel1;
+import Nivel1.Nivel1;
 import UcaDash.Sound;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -14,23 +14,23 @@ import javax.swing.Timer;
  
 public class Personaje {
         Sound sound;
-	static int ANCHO = 30;									//Diameter of the bird
+	static int ANCHO = 30;									
 	static int ALTO =64;
-        public static int X = -40;		//The x position of the bird. Does not change at any time. Should be exactly centered  
-	static int y =  Nivel1.HEIGHT - 60 - 64;							//The STARTING y position of the bird. Will change constantly
-	static int acceleration = 1;								//Used in the gravity simulation below
-	static int speed = 2; //The speed at which the bird will fall (constantly increased by acceleration (1) )
+        public static int X = -40;		  
+	static int y =  Nivel1.HEIGHT - 60 - 64;							
+	static int acceleration = 1;								
+	static int speed = 2; 
         static File imgload;
         static boolean wantjumpping;
 	
-	//Fetching bird.png from Imgur where it's hosted (not ideal, slower loading times)
+	
 	static Image img = null; {
                 ImageIcon ii = new ImageIcon(getClass().getResource("/Imagenes/Mario_de_Fuego_caminando.gif").getPath());
                 img = ii.getImage();
         }
 		
 	public Personaje(){
-		//just the constructor, nothing to see here
+		
 	}
         public void setY(){
         y+=y;
@@ -44,14 +44,7 @@ public class Personaje {
 		speed = - 17;
                 acceleration=1;
                 wantjumpping = true;
-              /*     Timer deathTimer = new Timer(650, new ActionListener(){
-                                        public void actionPerformed(ActionEvent event){
-                                           nojump();
-			 };
-                                        
-                        });
-                        deathTimer.start();*/
-                
+             
 	}
 	
 	//all movement stuff is here 
@@ -63,37 +56,37 @@ public class Personaje {
 			y += speed;
                     }
                     if(y>450)y=450;
-                        //y= round(y);
-                        //The actual movement, y location equals (where it was) + (how far it should go)
-		
-               //if (y==Nivel1.HEIGHT-150)acceleration=0;
-		//reset();											//rests bird's postion, actual method below
-		//Game.dead = true;
-                }//bird is dead! This is used in the Main method to reset the walls after a death
-		//}
+                    if(y<0){
+                        reset();
+                        Nivel1.dead=true;
+                        y=450;
+                    }
+                     
+                }
 	public  void nojump(){ 
             wantjumpping = false;
         }
 	
 	
-	public static void reset(){									//called after the bird dies
-		
-                X = -40;//resets position, speed, etc.
-		speed = 1;
-                y =  Nivel1.HEIGHT - 60 - 64;
-		Nivel1.monedas = 0;
-		;
-		Nivel1.deathMessage = "Has muerto, antes de completar el nivel :(";				//also shows this lovely message
-		
-		//This timer just makes the message dissapear after 3000 milliseconds
-		Timer deathTimer = new Timer(3000, new ActionListener(){
-			  public void actionPerformed(ActionEvent event){
-				Nivel1.deathMessage = "";
-			 };
-		});
-		
-		deathTimer.start();
-	}
+	public static void reset(){		            
+            X = -40;
+            speed = 2;
+            y =  Nivel1.HEIGHT - 60 - 64;
+            Nivel1.monedas = 0;
+            Nivel1.deathMessage = "Has muerto, antes de completar el nivel!!";
+            
+            Timer deathTimer;
+            deathTimer = new Timer(30, new ActionListener(){
+                @Override
+                public void actionPerformed(ActionEvent event){
+                    Nivel1.deathMessage = "";
+                };
+            });
+            
+            deathTimer.start();
+            
+        }
+        
 	
 	public static void paint(Graphics g){	
 		g.drawImage(img, X, y, null);

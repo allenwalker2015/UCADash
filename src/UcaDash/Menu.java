@@ -11,11 +11,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
  
-/*
- * This screen just waits for a mouseclick, whereupon it is removed from the JFrame and replaced with the game
- * I'd like not have to wait for the picture to download though, so I need to figure out how to package the images
- * within the Jar file. 
- */
+///ESTA PANTALLA DESAPARECE AL HACER CLICK
  
 public class Menu extends JPanel{
 	private static final long serialVersionUID = 1L;
@@ -47,6 +43,7 @@ public class Menu extends JPanel{
                         sound.play();
 	}
 	
+        @Override
 	public void paint (Graphics g){
 		super.paint(g);
 	

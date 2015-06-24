@@ -1,4 +1,4 @@
-package Niveles;
+package Nivel1;
  
 import Graficos.Fondo;
 import Graficos.Koopa;
@@ -14,60 +14,96 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
  
 @SuppressWarnings({"serial", "empty-statement"})
-public class Nivel1 extends JPanel{
+public class Nivel1 extends JPanel implements Runnable{
 	
 	public static int HEIGHT = 600;						
 	public static int WIDTH = 800;
-        int GOAL= 3;
-        Fondo fondo = new Fondo();
+        int vel;
+        int GOAL= 5; //Se detiene una moneda antes
+        Fondo fondo;
 	Personaje personaje = new Personaje();	
-        Koopa koopa1 = new Koopa(WIDTH + 50);
-        Koopa koopa2 = new Koopa(WIDTH + (WIDTH / 4) + 50);
+        Koopa koopa1;
+        Koopa koopa2;
         Koopa koopa3 = new Koopa(WIDTH + (WIDTH / 2) + 50);
-	Tubos wall = new Tubos(WIDTH);				
-	Tubos wall2 = new Tubos(WIDTH + (WIDTH / 4));	
-        Tubos wall3 = new Tubos(WIDTH + (WIDTH / 2));
-        // MP3 mp3 = new MP3();
-        Moneda moneda1 = new Moneda(WIDTH - WIDTH/2);
-        Moneda moneda2 = new Moneda(WIDTH + WIDTH/2);
-        Moneda moneda3 = new Moneda(WIDTH + WIDTH/2 + WIDTH/6);
-        private Sound sound= new Sound(getClass().getResource("/Sonidos/background.wav").getPath());
-        int Score=0;
-        public boolean Win=false;
-	public static int monedas = 0;						
-	public static int scrollX = 0;						
+	Tubos wall;				
+	Tubos wall2;	
+        Tubos wall3;
+        Moneda moneda1;
+        Moneda moneda2;
+        Moneda moneda3;
+        public Sound sound;
+        int Score;
+        public boolean Win;
+	public static int monedas;						
+	public static int scrollX;						
 	public static boolean dead = false;					
 	public static String deathMessage = "" ; 				
-        File floor1 = new  File(getClass().getResource("/Imagenes/floor.png").getPath());
-        BufferedImage floor = null;{
-	try {
-		floor = ImageIO.read(floor1);
-	} catch (IOException e) {
-		System.out.println("No carga el piso :(");		//prints "WRONG BACKGROUND" if there is an issue obtaining the background
-	}}
+        File floor1;
+        BufferedImage floor = null;
+        
+        @Override
+    public void run(){
+                            while(!Win){
+                                try {
+                                    repaint();                                                //Ejecuta el metodo de repintar del juego
+                                    move();
+                                    Thread.sleep(vel);
+                                } catch (InterruptedException ex) {
+                                    Logger.getLogger(Nivel1.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+                            }
+                            
+                            
+    }
 	
-   public Nivel1(){
-		sound.seek();
+   public Nivel1(int dif){
+        
+        start();
+        vel = dif;
+        sound.seek();
                 //mp3.play();
 		//this mouseAdapter just listens for clicks, whereupon it then tells the bird to jump 
-		this.addMouseListener(new MouseAdapter(){
+	this.addMouseListener(new MouseAdapter(){
  
-                        @Override
-			public void mousePressed(MouseEvent arg0) {
-                               
-				personaje.jump();
-                                
-			}
-                        
-                                        
-		
-		});	
-		
+        @Override
+            public void mousePressed(MouseEvent arg0) {               
+		personaje.jump(); 
+                }
+               	});
 	}
+   
+        public final void start(){
+            this.fondo = new Fondo(-2,"/Imagenes/clouds2.jpg");
+            this.floor1 = new  File(getClass().getResource("/Imagenes/floor.png").getPath());
+            this.Win = false;
+            this.Score = 0;
+            monedas = 0;
+            scrollX = 0;
+            this.sound = new Sound(getClass().getResource("/Sonidos/background.wav").getPath());
+            this.moneda3 = new Moneda(WIDTH + WIDTH/2 + WIDTH/6);
+            this.moneda2 = new Moneda(WIDTH + WIDTH/2);
+            this.moneda1 = new Moneda(WIDTH - WIDTH/2);
+            this.wall3 = new Tubos(WIDTH + (WIDTH / 2));
+            this.wall2 = new Tubos(WIDTH + (WIDTH / 4));
+            this.wall = new Tubos(WIDTH);
+            this.koopa2 = new Koopa(WIDTH + (WIDTH / 4) + 50);
+            this.koopa1 = new Koopa(WIDTH + 50);
+
+            try {
+                    floor = ImageIO.read(floor1);
+            } catch (IOException e) {
+                    System.out.println("No carga el piso :(");		//prints "WRONG BACKGROUND" if there is an issue obtaining the background
+            }
+        }
+        public void  restart(){
+            start();
+        }
  
 	@SuppressWarnings("static-access")
         
@@ -88,15 +124,14 @@ public class Nivel1 extends JPanel{
                 g.drawImage(floor, scrollX ,HEIGHT - 84, null); //Dibuja el piso
                 g.drawImage(floor, scrollX+677 ,HEIGHT - 84, null); //dibuja el piso
                 g.drawImage(floor, scrollX+(2* 677) ,HEIGHT - 84, null);  //dibuja el piso
- 		g.setFont(new Font("comicsans", Font.BOLD, 40));       //Asigna el tipo de fuente a usar en los textos
+ 		g.setFont(new Font("comicsans", Font.BOLD, 39));       //Asigna el tipo de fuente a usar en los textos
  		g.drawString("MONEDAS: " + monedas,100,100);           //Muestra el contado de monedas
- 		g.drawString(deathMessage, 100, 200);				//Muestra el mensaje de fiin del juego 
+ 		g.drawString(deathMessage, 10, 200);				//Muestra el mensaje de fiin del juego 
 	}
 	
 	@SuppressWarnings("static-access")
 	public void move(){
             fondo.move();
-            
             moneda1.move();   //hace el respectivo movimiento de la moneda
             moneda2.move();
             moneda3.move();
@@ -118,11 +153,11 @@ public class Nivel1 extends JPanel{
 		wall.x = 800;
 		wall2.x = 800 + (WIDTH / 2);
                 wall3.x = 800 + (WIDTH / 2) +  (WIDTH / 2);
+                start();
 		dead = false;
 		}
 		
-		if ( (wall.x == Personaje.X) ) 	//Increments the monedas when the player passes a wall
-			score();
+		
 	}
 	
 	public static void score(){
@@ -146,6 +181,8 @@ public class Nivel1 extends JPanel{
             if(moneda1.get) moneda1= new Moneda(WIDTH + WIDTH/2); //si se obtubo la moneda se crea otro nuevo objeto del tipo moneda
             if(moneda2.get) moneda2= new Moneda(WIDTH + WIDTH/2 + WIDTH/4);
             if(moneda3.get) moneda3= new Moneda(WIDTH + WIDTH/2 +2*WIDTH/4);
-            //if(monedas==GOAL){ Win=true;sound.clip.stop();};
+            if(monedas==GOAL){ 
+                Win=true;
+            }
             }
 }

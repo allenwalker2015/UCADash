@@ -1,6 +1,6 @@
 package Graficos;
  
-import Niveles.Nivel1;
+import Nivel1.Nivel1;
 import UcaDash.Sound;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -10,48 +10,46 @@ import javax.swing.ImageIcon;
 
 public class Koopa {
         private Sound sound= new Sound(getClass().getResource("/Sonidos/mb_touch.wav").getPath());
-	Random rnd = new Random();						//used to generate a random height for						//used to generate a random height for dat gap
-	public int x ;											//the x position of the wall, always changing (right to left)
-	int initX;
-        int y = rnd.nextInt(100);	//generates the y value that is the top of the bottom wall
-	public static int speed = - 6;							//scrolling speed
-	int WIDTH = 66;									//width of a wall, it's a constant 
-	int height = 87;			
-	//procures the Tubos image from Imgur
+	Random rnd = new Random();						//Genera el rand
+	public int x ;                                                          //Posicion en X del Koopa
+	int initX;                                                              //Posicion inicial en X del Koopa
+        int y = rnd.nextInt(100);                                               //Setea la posicion en Y aleatoreamente
+	public static int speed = - 6;						//Velocidad de desplazamiento
+	int WIDTH = 66;                                                         //Ancho del personaje 
+	int height = 87;                                                        //Alto del personaje
 	static Image img = null; {
                 ImageIcon ii = new ImageIcon(getClass().getResource("/Imagenes/koopa2.gif").getPath());
                 img = ii.getImage();
         }
 	
 	
-	public Koopa(int i){								//allows me to differentiate the x positions of the two walls
+	public Koopa(int i){								//Constructor de el koopa
 		this.x = i;
                 initX=i;
 	}
 	
 	//draws the wall
-	public void paint(Graphics g){
-		g.drawImage(img, x, y, null);								//top part 
-		g.drawRect(x, y,WIDTH, height);
+	public void paint(Graphics g){                                                  //Define lo que se va a pintar
+		g.drawImage(img, x, y, null);                                           //Pinta a el personaje
+		g.drawRect(x, y,WIDTH, height);                                         //Pinta el cuadro de debug
 	}
 	
 	public void move(){
 		
 			x += speed;								//scrolls the wall
 	
-		//These Rectanlges are used to detect collisions
-		Rectangle wallBounds = new Rectangle(x, y, WIDTH, height);
-		//Rectangle wallBoundsTop = new Rectangle(x, 0, WIDTH, Nivel1.HEIGHT - (height + GAP));
-		
-		//If birdman collids with a wall, he dies and  the game, bird, and walls are all reset
-		if (wallBounds.intersects(Personaje.getBounds())) {
-                        sound.play();
-			Personaje.reset();
-			died();
-                        sound= new Sound(getClass().getResource("/Sonidos/mb_touch.wav").getPath());
+		//Crea el rectangulo de el koopa
+		Rectangle koopaBounds = new Rectangle(x, y, WIDTH, height);
+			
+		//Si el personaje choca contra este koopa
+		if (koopaBounds.intersects(Personaje.getBounds())) {
+                        sound.play();                                                       //Libera el sonido
+			Personaje.reset();                                                  //Resetea el personaje
+			died();                                                             //Llama la funcion de muerte
+                        sound= new Sound(getClass().getResource("/Sonidos/mb_touch.wav").getPath());    //Recarga el sonido
 		}
 			
-		//pushes the wall back to just off screen on the right when it gets offscreen on the left (the loop)
+		//Mueve el personaje 
 		if (x <= 0 - WIDTH){
 			x= initX;
 			y = rnd.nextInt(100);
@@ -60,7 +58,7 @@ public class Koopa {
 	}
 	
  
-	//this is executed on death, just sets a random y value and tells Nivel1 that the bird died :(
+	//Se ejecuta cuando el personaje muere
 	public void died(){
 			y = rnd.nextInt(100) + 50;
 			Nivel1.dead = true;
