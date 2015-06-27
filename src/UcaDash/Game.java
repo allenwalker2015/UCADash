@@ -27,8 +27,8 @@ import javax.swing.JFrame;
                 contentPane.setLayout(cardLayout);
                
 		final Menu menu = new Menu();							//the menu used in each instance
-		final Nivel1 level1 = new Nivel1(30);
-                final Nivel2 level2 = new Nivel2(30);    
+		final Nivel1 level1 = new Nivel1(20);
+                final Nivel2 level2 = new Nivel2(20);    
                  contentPane.add(menu, "MainMenu");
                  contentPane.add(level1, "Game1");
                  contentPane.add(level2, "Game2");

@@ -79,6 +79,7 @@ public class Nivel1 extends JPanel implements Runnable{
    
         public final void start(){
             this.personaje = new Personaje();
+            personaje.reset();
             numscreen=0;
             this.fondo = new Fondo(-1,"Imagenes/clouds2.jpg");
             this.floor1 = new  File("Imagenes/floor.png");
