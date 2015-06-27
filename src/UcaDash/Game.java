@@ -48,18 +48,23 @@ import javax.swing.JFrame;
                          menu.move();
 		}
                 cardLayout.next(contentPane);
+                while(!level2.Win){   
+                level1.Win=false;
+                level2.Win=false;
                 level1.start();
-                //frame.remove(menu);                                                             //Quita el menu
-		//frame.add(game);                                                                //Añade el juego al frame
-                //game.setVisible(true);                                                          //Hace visisble al juego
-		frame.revalidate();
+                frame.revalidate();
                 level1.run();
+                cardLayout.next(contentPane);
                if(level1.Win){
                    level1.sound.stop1();
-                   cardLayout.next(contentPane);
+                   //cardLayout.next(contentPane);
                    level2.start(); 
                    level2.run();
-                           } 
+                           }
+               level2.sound.stop1();
+               cardLayout.next(contentPane);
+               cardLayout.next(contentPane);
+               }
                frame.dispose();
                 System.out.println("Termino el juego");
                 System.exit(0);            	

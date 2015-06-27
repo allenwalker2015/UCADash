@@ -52,6 +52,7 @@ public class Nivel2 extends JPanel implements Runnable{
                                 } catch (InterruptedException ex) {
                                     Logger.getLogger(Nivel2.class.getName()).log(Level.SEVERE, null, ex);
                                 }
+                                if(dead)break;
                             }
                             
                             
@@ -85,7 +86,7 @@ public class Nivel2 extends JPanel implements Runnable{
             this.moneda3 = new Moneda(WIDTH + WIDTH/2 + WIDTH/6);
             this.moneda2 = new Moneda(WIDTH + WIDTH/2);
             this.moneda1 = new Moneda(WIDTH - WIDTH/2);
-     
+            dead = false;
             this.bird1 = new Enemy1(WIDTH + (WIDTH / 4) + 50);
             this.bird2 = new Enemy1(WIDTH + 50);
             this.bird3 = new Enemy1(WIDTH + (WIDTH / 2) + 50);
@@ -144,7 +145,7 @@ public class Nivel2 extends JPanel implements Runnable{
                         numscreen++;
                 }
             
-            if(dead){dead=false;start();}
+            //if(dead){dead=false;start();}
 	}
 	
 	public static void score(){
@@ -207,6 +208,6 @@ public class Nivel2 extends JPanel implements Runnable{
             if(monedas>=GOAL && numscreen==10){
                 Win=true;
             }
-            if(numscreen>=10 && monedas<GOAL){ start();}
+            if(numscreen>=10 && monedas<GOAL){ Nivel2.dead=true;}
         }
 }

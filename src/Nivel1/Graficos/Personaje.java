@@ -52,8 +52,8 @@ public class Personaje {
 	//This is called when the bird jumps (on mouse click). It just temporarily sets the speed to -17 (arbitrary number), then is slowly taken back down because 
 	//of "gravity"
 	public void jump(){
-                if(debug)System.out.println("Los clicks son:" +clicks);
-                if(clicks<=2){
+                //if(debug)System.out.println("Los clicks son:" +clicks);
+                if(X ==60) if(clicks<=2){
                 {
                 img = img2;
                 }
@@ -69,19 +69,17 @@ public class Personaje {
 	//all movement stuff is here 
 	public static void move(){
                     if(X <60)X++;
-                    if(over)y=overY;
                     else{if(y<=450 || wantjumpping){
                             speed += acceleration;								
                             y += speed;
                         }
-                        if(y>450){ 
+                        }
+                     if(y>450){ 
                             y=450;
                             clicks = 0;
                         {
                         img = img3;
                         }
-                        }
-                    
                         if(y<0){
                             reset();
                             Nivel1.dead=true;

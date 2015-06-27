@@ -27,7 +27,7 @@ public class Nivel1 extends JPanel implements Runnable{
         int numscreen=0;
         int GOAL= 5; //Se detiene una moneda antes
         Fondo fondo;
-	Personaje personaje = new Personaje();	
+	Personaje personaje;	
         Koopa koopa1;
         Koopa koopa2;
         Koopa koopa3;
@@ -63,8 +63,6 @@ public class Nivel1 extends JPanel implements Runnable{
     }
 	
    public Nivel1(int dif){
-        
-        
         start();
         vel = dif;
                 //mp3.play();
@@ -80,6 +78,7 @@ public class Nivel1 extends JPanel implements Runnable{
 	}
    
         public final void start(){
+            this.personaje = new Personaje();
             numscreen=0;
             this.fondo = new Fondo(-1,"Imagenes/clouds2.jpg");
             this.floor1 = new  File("Imagenes/floor.png");
