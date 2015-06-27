@@ -12,6 +12,7 @@ import javax.imageio.ImageIO;
  
 
 public class Tubos {
+        boolean debug=false;
         private Sound sound= new Sound("Sonidos/mb_touch.wav");
 	Random rnd = new Random();						
 	public int x ;											
@@ -38,14 +39,14 @@ public class Tubos {
 	//draws the wall
 	public void paint(Graphics g){
 		g.drawImage(img, x, y, null);	
-                g.drawRect(x, y,WIDTH, height);//top part 
+                if(debug)g.drawRect(x, y,WIDTH, height); 
 		
 	}
 	
 	public void move(){
 		x += speed;								
 		Rectangle wallBounds = new Rectangle(x, y, WIDTH, height);
-                System.out.println("La X de el tubo es:" + x);
+                if(debug)System.out.println("La X de el tubo es:" + x);
                 if (wallBounds.intersects(Personaje.getBounds())) {
                         sound.play();
 			Personaje.reset();

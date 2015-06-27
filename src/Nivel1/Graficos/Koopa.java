@@ -9,6 +9,7 @@ import java.util.Random;
 import javax.swing.ImageIcon;
 
 public class Koopa {
+        boolean debug=false;
         private Sound sound= new Sound("Sonidos/mb_touch.wav");
 	Random rnd = new Random();						//Genera el rand
 	public int x ;                                                          //Posicion en X del Koopa
@@ -31,7 +32,7 @@ public class Koopa {
 	//draws the wall
 	public void paint(Graphics g){                                                  //Define lo que se va a pintar
 		g.drawImage(img, x, y, null);                                           //Pinta a el personaje
-		g.drawRect(x+10, y+20,WIDTH, height);                                         //Pinta el cuadro de debug
+		if(debug)g.drawRect(x+10, y+20,WIDTH, height);                                         //Pinta el cuadro de debug
 	}
 	
 	public void move(){

@@ -13,6 +13,7 @@ import javax.swing.Timer;
  
  
 public class Personaje {
+        static boolean debug=false;
         private static boolean over;
         private static int overY;
         Sound sound;
@@ -51,7 +52,7 @@ public class Personaje {
 	//This is called when the bird jumps (on mouse click). It just temporarily sets the speed to -17 (arbitrary number), then is slowly taken back down because 
 	//of "gravity"
 	public void jump(){
-                System.out.println("Los clicks son:" +clicks);
+                if(debug)System.out.println("Los clicks son:" +clicks);
                 if(clicks<=2){
                 {
                 img = img2;
@@ -116,7 +117,7 @@ public class Personaje {
 	
 	public static void paint(Graphics g){	
 		g.drawImage(img, X, y, null);
-                g.drawRect(X+5, y,ANCHO, ALTO);//paints the bird's icon
+                if(debug)g.drawRect(X+5, y,ANCHO, ALTO);//paints the bird's icon
 	}
 	
 	public static Rectangle getBounds(){

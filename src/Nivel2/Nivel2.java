@@ -73,7 +73,7 @@ public class Nivel2 extends JPanel implements Runnable{
 	}
    
         public final void start(){
-            this.fondo = new Fondo(-2,"Imagenes/newclouds2.png");
+            this.fondo = new Fondo(-1,"Imagenes/newclouds2.png");
             numscreen=0;
             this.Win = false;
             this.Score = 0;

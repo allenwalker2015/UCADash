@@ -10,6 +10,7 @@ import javax.swing.ImageIcon;
  
  
 public class Moneda{
+        boolean debug=false;
         private Sound sound= new Sound("Sonidos/coin.wav");
 	Random rnd = new Random();											
 	int x ;											
@@ -34,7 +35,7 @@ public class Moneda{
 	public void paint(Graphics g){
                 if(!get){
 		g.drawImage(img, x, y, null);	
-                g.drawRect(x, y, WIDTH,height);
+                if(debug)g.drawRect(x, y, WIDTH,height);
                 }
                 
 	}
