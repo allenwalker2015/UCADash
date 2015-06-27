@@ -26,7 +26,7 @@ public class Fondo {
     public Fondo(int vel,String path) {
         this.velocidad = vel;
         this.img = null;
-        this.fond = new  File(getClass().getResource(path).getPath());
+        this.fond = new  File(path);
         try {
 		img = ImageIO.read(fond);
 	} catch (IOException e) {

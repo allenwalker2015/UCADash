@@ -27,9 +27,18 @@ public class Personaje {
         public static int clicks=0;
 	
 	
-	static Image img = null; {
-                ImageIcon ii = new ImageIcon(getClass().getResource("/Imagenes/Mario_de_Fuego_caminando.gif").getPath());
+	static Image img = null; static {
+                ImageIcon ii = new ImageIcon("Imagenes/mario2.gif");
                 img = ii.getImage();
+        }
+        
+        static Image img2 = null; static {
+                ImageIcon ii = new ImageIcon("Imagenes/jumpmario1.png");
+                img2 = ii.getImage();
+        }
+        static Image img3 = null; static {
+                ImageIcon ii = new ImageIcon("Imagenes/mario2.gif");
+                img3 = ii.getImage();
         }
 		
 	public Personaje(){
@@ -44,8 +53,11 @@ public class Personaje {
 	public void jump(){
                 System.out.println("Los clicks son:" +clicks);
                 if(clicks<=2){
+                {
+                img = img2;
+                }
                 sound.interrupted();
-                sound= new Sound(getClass().getResource("/Sonidos/mb_jump.wav").getPath());
+                sound= new Sound("Sonidos/mb_jump.wav");
                 sound.play();
 		speed = - 17;
                 acceleration=1;
@@ -58,19 +70,22 @@ public class Personaje {
                     if(X <60)X++;
                     if(over)y=overY;
                     else{if(y<=450 || wantjumpping){
-			speed += acceleration;								
-			y += speed;
-                    }
-                    if(y>450){ 
-                        y=450;
-                        clicks = 0;
-                    }
+                            speed += acceleration;								
+                            y += speed;
+                        }
+                        if(y>450){ 
+                            y=450;
+                            clicks = 0;
+                        {
+                        img = img3;
+                        }
+                        }
                     
-                    if(y<0){
-                        reset();
-                        Nivel1.dead=true;
-                        y=450;
-                    }
+                        if(y<0){
+                            reset();
+                            Nivel1.dead=true;
+                            y=450;
+                        }
                     }
                      
                 }

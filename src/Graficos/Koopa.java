@@ -9,7 +9,7 @@ import java.util.Random;
 import javax.swing.ImageIcon;
 
 public class Koopa {
-        private Sound sound= new Sound(getClass().getResource("/Sonidos/mb_touch.wav").getPath());
+        private Sound sound= new Sound("Sonidos/mb_touch.wav");
 	Random rnd = new Random();						//Genera el rand
 	public int x ;                                                          //Posicion en X del Koopa
 	int initX;                                                              //Posicion inicial en X del Koopa
@@ -18,7 +18,7 @@ public class Koopa {
 	int WIDTH = 66;                                                         //Ancho del personaje 
 	int height = 87;                                                        //Alto del personaje
 	static Image img = null; {
-                ImageIcon ii = new ImageIcon(getClass().getResource("/Imagenes/koopa2.gif").getPath());
+                ImageIcon ii = new ImageIcon("Imagenes/koopa2.gif");
                 img = ii.getImage();
         }
 	
@@ -46,7 +46,7 @@ public class Koopa {
                         sound.play();                                                       //Libera el sonido
 			Personaje.reset();                                                  //Resetea el personaje
 			died();                                                             //Llama la funcion de muerte
-                        sound= new Sound(getClass().getResource("/Sonidos/mb_touch.wav").getPath());    //Recarga el sonido
+                        sound= new Sound("Sonidos/mb_touch.wav");    //Recarga el sonido
 		}
 			
 		//Mueve el personaje 

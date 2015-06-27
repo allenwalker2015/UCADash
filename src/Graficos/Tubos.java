@@ -12,7 +12,7 @@ import javax.imageio.ImageIO;
  
 
 public class Tubos {
-        private Sound sound= new Sound(getClass().getResource("/Sonidos/mb_touch.wav").getPath());
+        private Sound sound= new Sound(getClass().getResource("../Sonidos/mb_touch.wav").getPath());
 	Random rnd = new Random();						
 	public int x ;											
 	int initX;
@@ -24,7 +24,7 @@ public class Tubos {
 	//procures the Tubos image from Imgur
 	static BufferedImage img = null;{
 		try {
-			img = ImageIO.read(new File(getClass().getResource("/Imagenes/tubo2.png").getPath()));
+			img = ImageIO.read(new File(getClass().getResource("../Imagenes/tubo2.png").getPath()));
 					
 		} catch (IOException e) {
 			System.out.println("No sirve el tubo");		
@@ -50,7 +50,9 @@ public class Tubos {
                         sound.play();
 			Personaje.reset();
 			died();
-                        sound= new Sound(getClass().getResource("/Sonidos/mb_touch.wav").getPath());
+                        try{
+                        sound= new Sound(getClass().getResource("../Sonidos/mb_touch.wav").getPath());
+                        }catch(Exception e){ System.out.println(e.getMessage());}
 		}
 		if (x <= 0 - WIDTH){
 			x= initX;

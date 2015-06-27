@@ -10,7 +10,7 @@ import javax.swing.ImageIcon;
  
  
 public class Moneda{
-        private Sound sound= new Sound(getClass().getResource("/Sonidos/coin.wav").getPath());
+        private Sound sound= new Sound("Sonidos/coin.wav");
 	Random rnd = new Random();											
 	int x ;											
 	int y =  rnd.nextInt(((Nivel1.HEIGHT-80) - 300) + 1) + 300;	
@@ -22,7 +22,7 @@ public class Moneda{
 	int GAP = 100;			
 	//procures the Obstaculos image from Imgur
 	static Image img = null; {
-                ImageIcon ii = new ImageIcon(getClass().getResource("/Imagenes/coin2.gif").getPath());
+                ImageIcon ii = new ImageIcon("Imagenes/coin2.gif");
                 img = ii.getImage();
         }
 	
@@ -49,7 +49,7 @@ public class Moneda{
 		if (coinBounds.intersects(Personaje.getBounds())) {
                         sound.play();
                         get=true;
-                        sound= new Sound(getClass().getResource("/Sonidos/coin.wav").getPath());
+                        sound= new Sound("Sonidos/coin.wav");
                         coin=1;
                         
                         }

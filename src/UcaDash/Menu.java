@@ -1,7 +1,5 @@
 package UcaDash;
  
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -17,11 +15,18 @@ public class Menu extends JPanel{
 	private static final long serialVersionUID = 1L;
 	int highscore;
         Sound sound;
-	
+	int i=0;
+        int j= 0;
 	//gets the background from imgur
-	static BufferedImage img = null;{
+	static BufferedImage img = null;static {
 		try {
-			img = ImageIO.read(new File(getClass().getResource("/Imagenes/menu.bmp").getPath()));
+			img = ImageIO.read(new File("Imagenes/main2.jpg"));
+		} catch (IOException e) {
+			System.out.println("WRONG MENU");
+		}}
+        static BufferedImage text = null;static {
+		try {
+			text = ImageIO.read(new File("Imagenes/text.png"));
 		} catch (IOException e) {
 			System.out.println("WRONG MENU");
 		}}
@@ -31,7 +36,7 @@ public class Menu extends JPanel{
 	
 	public Menu(){
 		setFocusable(true);
-                sound = new Sound(getClass().getResource("/Sonidos/menu.wav").getPath());
+                sound = new Sound("Sonidos/menu.wav");
                 //waits for a mouseclick, then toggles startGame
 		addMouseListener(new MouseAdapter(){
 			@Override
@@ -40,17 +45,19 @@ public class Menu extends JPanel{
 			}
  
 			});
+                        
                         sound.play();
 	}
+        
+        public void move(){
+        i--;
+        if(i<-1914)i=0;
+        repaint();
+        }
 	
         @Override
 	public void paint (Graphics g){
-		super.paint(g);
-	
-		g.drawImage(img, 0, 0, null);	
-                g.setFont(new Font("comicsans", Font.PLAIN, 50));//paints background
-                g.setColor(Color.WHITE);
-                g.drawString("BIENVENIDO A UCADASH", 100, 400);
-		
+		g.drawImage(img, i, j-3, null);
+                g.drawImage(text, 150, 250, null);
 	}
 }

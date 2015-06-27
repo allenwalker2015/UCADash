@@ -4,9 +4,11 @@ import Nivel1.Nivel1;
 import javax.swing.JFrame;
  
  
-	public class Main {
- 	static JFrame frame = new JFrame();		
-    	public static void main (String [] args) throws InterruptedException{		
+	public class Game {
+ 	static JFrame frame = new JFrame();	
+        
+        
+    	public static void main (String args[]) throws InterruptedException{		
 		frame.setSize(Nivel1.WIDTH, Nivel1.HEIGHT);					//Se configura el tamaño de la JFrame
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);                           //Operacion default al iniciar
 		frame.setLocationRelativeTo(null);						//Configura la relatividad de la posicion de la ventana
@@ -20,10 +22,6 @@ import javax.swing.JFrame;
 		
 		final Menu menu = new Menu();							//the menu used in each instance
 		final Nivel1 game = new Nivel1(30);                                               //the game used in each instance
-		
-		
-		
-		
 		frame.add(menu);                                                                //Agega el menu a la frame
 		menu.setVisible(true);
                 frame.setVisible(true);
@@ -31,7 +29,8 @@ import javax.swing.JFrame;
 		frame.repaint();
 		
 		while (!menu.startGame){                                                        //Espera hasta que se haga click en el menu
-			Thread.sleep(5);
+			Thread.sleep(60);
+                        menu.move();
 		}
                 
                 frame.remove(menu);                                                             //Quita el menu
@@ -42,8 +41,6 @@ import javax.swing.JFrame;
                if(game.Win)frame.setVisible(false);  
                frame.dispose();
                 System.out.println("Termino el juego");
-                System.exit(0);
-							
-                	
+                System.exit(0);            	
 } 
 }
