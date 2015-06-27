@@ -136,9 +136,9 @@ public class Nivel1 extends JPanel implements Runnable{
             moneda1.move();   //hace el respectivo movimiento de la moneda
             moneda2.move();
             moneda3.move();
-            personaje.validation(wall);
-            personaje.validation(wall2);
-            personaje.validation(wall3);
+            //personaje.validation(wall);
+            //personaje.validation(wall2);
+            //personaje.validation(wall3);
             wall.move();	 //hace el respectivo movimiento de el tubo
             wall2.move();
             wall3.move();
