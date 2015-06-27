@@ -1,10 +1,9 @@
 package Nivel1;
- 
-import Graficos.Fondo;
-import Graficos.Koopa;
-import Graficos.Moneda;
-import Graficos.Personaje;
-import Graficos.Tubos;
+import Nivel1.Graficos.Fondo;
+import Nivel1.Graficos.Koopa;
+import Nivel1.Graficos.Moneda;
+import Nivel1.Graficos.Personaje;
+import Nivel1.Graficos.Tubos;
 import UcaDash.Sound;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -81,6 +80,7 @@ public class Nivel1 extends JPanel implements Runnable{
 	}
    
         public final void start(){
+            numscreen=0;
             this.fondo = new Fondo(-2,"Imagenes/clouds2.jpg");
             this.floor1 = new  File("Imagenes/floor.png");
             this.Win = false;
@@ -128,8 +128,8 @@ public class Nivel1 extends JPanel implements Runnable{
                 g.drawImage(floor, scrollX+677 ,HEIGHT - 84, null); //dibuja el piso
                 g.drawImage(floor, scrollX+(2* 677) ,HEIGHT - 84, null);  //dibuja el piso
  		g.setFont(new Font("comicsans", Font.BOLD, 39));       //Asigna el tipo de fuente a usar en los textos
- 		g.drawString("MONEDAS: " + monedas,100,100);           //Muestra el contado de monedas
- 		g.drawString(deathMessage, 10, 200);				//Muestra el mensaje de fiin del juego 
+ 		g.drawString("MONEDAS: " + monedas + "  PANTALLAS: " + numscreen,100,100);          //Muestra el contado de monedas
+ 		g.drawString(deathMessage, scrollX+ 200, 200);				//Muestra el mensaje de fiin del juego 
 	}
 	
 	@SuppressWarnings("static-access")
@@ -222,8 +222,9 @@ public class Nivel1 extends JPanel implements Runnable{
             if(moneda1.get) moneda1= new Moneda(WIDTH + WIDTH); //si se obtubo la moneda se crea otro nuevo objeto del tipo moneda
             if(moneda2.get) moneda2= new Moneda(WIDTH + WIDTH/2 + WIDTH/4);
             if(moneda3.get) moneda3= new Moneda(WIDTH + WIDTH/2 +2*WIDTH/4);
-            if(monedas>=GOAL && numscreen==5){
+           if(monedas>=GOAL && numscreen==4){
                 Win=true;
             }
+            if(numscreen>=4 && monedas<GOAL){ start();}
         }
 }
