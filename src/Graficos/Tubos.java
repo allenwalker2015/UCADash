@@ -24,7 +24,7 @@ public class Tubos {
 	//procures the Tubos image from Imgur
 	static BufferedImage img = null;{
 		try {
-			img = ImageIO.read(new File(getClass().getResource("/Imagenes/tubo2.png").getPath()));
+			img = ImageIO.read(new File("/Imagenes/tubo2.png"));
 					
 		} catch (IOException e) {
 			System.out.println("No sirve el tubo");		
@@ -43,22 +43,14 @@ public class Tubos {
 	}
 	
 	public void move(){
-		
-			x += speed;								
-	
-		
+		x += speed;								
 		Rectangle wallBounds = new Rectangle(x, y, WIDTH, height);
-		
-		
-		
 		if (wallBounds.intersects(Personaje.getBounds())) {
                         sound.play();
 			Personaje.reset();
 			died();
                         sound= new Sound(getClass().getResource("/Sonidos/mb_touch.wav").getPath());
 		}
-			
-		
 		if (x <= 0 - WIDTH){
 			x= initX;
 			y = rnd.nextInt(Nivel1.HEIGHT - 400) + 300;
@@ -69,13 +61,18 @@ public class Tubos {
  
 	
 	public void died(){
-			y = 500;
-			height = Nivel1.HEIGHT - y;
+			//y = 500;
+			//height = Nivel1.HEIGHT - y;
 			Nivel1.dead = true;
+                        //Nivel1.sound.clip.close();
 	}
         
         public Rectangle getBounds(){
             Rectangle rect= new Rectangle(x, y, WIDTH, height);
-            return rect;
+            return rect;    
+        }
+        
+        public void stopsound(){
+        Sound.interrupted();
         }
 }

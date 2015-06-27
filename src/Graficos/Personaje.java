@@ -39,12 +39,12 @@ public class Personaje {
 	//This is called when the bird jumps (on mouse click). It just temporarily sets the speed to -17 (arbitrary number), then is slowly taken back down because 
 	//of "gravity"
 	public void jump(){
+                //sound.stop1();
                 sound= new Sound(getClass().getResource("/Sonidos/mb_jump.wav").getPath());
                 sound.play();
 		speed = - 17;
                 acceleration=1;
-                wantjumpping = true;
-             
+                wantjumpping = true; 
 	}
 	
 	//all movement stuff is here 
@@ -96,6 +96,8 @@ public class Personaje {
 	public static Rectangle getBounds(){
 		 return new Rectangle(X, y, ANCHO, ALTO);		//Gives a rectangle used to detect collisions in the Wall class
 		}
- 
+        public void stopsound(){
+        Sound.interrupted();
+        }
 	
 }

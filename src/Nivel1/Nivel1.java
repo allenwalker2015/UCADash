@@ -37,7 +37,7 @@ public class Nivel1 extends JPanel implements Runnable{
         Moneda moneda1;
         Moneda moneda2;
         Moneda moneda3;
-        public Sound sound;
+        public Sound sound = new Sound(getClass().getResource("/Sonidos/background.wav").getPath());
         int Score;
         public boolean Win;
 	public static int monedas;						
@@ -66,7 +66,6 @@ public class Nivel1 extends JPanel implements Runnable{
         
         start();
         vel = dif;
-        sound.seek();
                 //mp3.play();
 		//this mouseAdapter just listens for clicks, whereupon it then tells the bird to jump 
 	this.addMouseListener(new MouseAdapter(){
@@ -85,7 +84,10 @@ public class Nivel1 extends JPanel implements Runnable{
             this.Score = 0;
             monedas = 0;
             scrollX = 0;
+            sound.stop1();
+            //sound.interrupt();
             this.sound = new Sound(getClass().getResource("/Sonidos/background.wav").getPath());
+            sound.play();
             this.moneda3 = new Moneda(WIDTH + WIDTH/2 + WIDTH/6);
             this.moneda2 = new Moneda(WIDTH + WIDTH/2);
             this.moneda1 = new Moneda(WIDTH - WIDTH/2);
@@ -94,7 +96,6 @@ public class Nivel1 extends JPanel implements Runnable{
             this.wall = new Tubos(WIDTH);
             this.koopa2 = new Koopa(WIDTH + (WIDTH / 4) + 50);
             this.koopa1 = new Koopa(WIDTH + 50);
-
             try {
                     floor = ImageIO.read(floor1);
             } catch (IOException e) {
@@ -105,8 +106,7 @@ public class Nivel1 extends JPanel implements Runnable{
             start();
         }
  
-	@SuppressWarnings("static-access")
-        
+	@SuppressWarnings("static-access")      
         @Override
 	public void paint(Graphics g){
 		super.paint(g);
@@ -165,13 +165,31 @@ public class Nivel1 extends JPanel implements Runnable{
                 
 	}
         public void notover(){
-             while(moneda1.getBounds().intersects(new Rectangle(HEIGHT - 100,0,800,84)) |moneda1.getBounds().intersects(wall.getBounds()) | moneda1.getBounds().intersects(wall2.getBounds()) | moneda1.getBounds().intersects(wall3.getBounds())){
+             while(moneda1.getBounds().intersects(new Rectangle(0,HEIGHT - 100,800,84)) 
+                     |moneda1.getBounds().intersects(wall.getBounds()) 
+                     | moneda1.getBounds().intersects(wall2.getBounds()) 
+                     | moneda1.getBounds().intersects(wall3.getBounds())
+                     | moneda1.getBounds().intersects(moneda2.getBounds())
+                     | moneda1.getBounds().intersects(moneda3.getBounds())
+                     ){
                 moneda1 = new Moneda(WIDTH + WIDTH/2);
                 }    
-            while(moneda2.getBounds().intersects(new Rectangle(HEIGHT - 100,0,800,84)) |moneda2.getBounds().intersects(wall.getBounds()) | moneda2.getBounds().intersects(wall2.getBounds()) | moneda2.getBounds().intersects(wall3.getBounds())){
+            while(moneda2.getBounds().intersects(new Rectangle(0,HEIGHT - 100,800,84)) 
+                    |moneda2.getBounds().intersects(wall.getBounds()) 
+                    | moneda2.getBounds().intersects(wall2.getBounds()) 
+                    | moneda2.getBounds().intersects(wall3.getBounds())
+                    |moneda2.getBounds().intersects(moneda1.getBounds())
+                    |moneda2.getBounds().intersects(moneda3.getBounds())
+                    ){
                 moneda2 = new Moneda(WIDTH + WIDTH/2 + WIDTH/4);
                 }
-            while(moneda3.getBounds().intersects(new Rectangle(HEIGHT - 100,0,800,84)) |moneda3.getBounds().intersects(wall.getBounds()) | moneda3.getBounds().intersects(wall2.getBounds()) | moneda3.getBounds().intersects(wall3.getBounds())){
+            while(moneda3.getBounds().intersects(new Rectangle(0,HEIGHT - 100,800,84)) 
+                    |moneda3.getBounds().intersects(wall.getBounds()) 
+                    | moneda3.getBounds().intersects(wall2.getBounds()) 
+                    | moneda3.getBounds().intersects(wall3.getBounds())
+                    |moneda3.getBounds().intersects(moneda2.getBounds())
+                    |moneda3.getBounds().intersects(moneda1.getBounds())
+                    ){
                 moneda3 = new Moneda(WIDTH + WIDTH/2 +2*WIDTH/4);
                 }
                
@@ -184,5 +202,5 @@ public class Nivel1 extends JPanel implements Runnable{
             if(monedas==GOAL){ 
                 Win=true;
             }
-            }
+        }
 }

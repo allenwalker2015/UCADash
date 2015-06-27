@@ -19,8 +19,9 @@ import javax.sound.sampled.UnsupportedAudioFileException;
  *
  * @author KevinAlexander
  */
-public class Sound {
+public class Sound extends Thread {
     File soundFile;
+    
     AudioInputStream audioIn;
     public Clip clip;
     public Sound(String filename){ 
@@ -34,25 +35,14 @@ public class Sound {
         
     }
     public void play(){
-        Thread thread;
-        thread = new Thread(){
-            @Override
-            public void run(){
-                try {
-                    clip.open(audioIn);
-                } catch (LineUnavailableException | IOException ex) {
-                    Logger.getLogger(Sound.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                clip.start();
-            }
-        };
-        thread.start();
+        try {
+            clip.open(audioIn);
+        } catch (LineUnavailableException | IOException ex) {
+            Logger.getLogger(Sound.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        clip.start();
     }
     public void seek(){
-        Thread thread;
-        thread = new Thread(){
-            @Override
-            public void run(){
                 try {
                     clip.open(audioIn);
                 } catch (LineUnavailableException | IOException ex) {
@@ -60,7 +50,10 @@ public class Sound {
                 }
                 clip.loop(Clip.LOOP_CONTINUOUSLY);
             }
-        };
-        thread.start();
-    }
+     
+     public void stop1(){
+                clip.close();
+                interrupted();
+     }
+               
 }

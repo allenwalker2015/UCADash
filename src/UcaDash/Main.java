@@ -31,7 +31,7 @@ import javax.swing.JFrame;
 		frame.repaint();
 		
 		while (!menu.startGame){                                                        //Espera hasta que se haga click en el menu
-			Thread.sleep(10);
+			Thread.sleep(5);
 		}
                 
                 frame.remove(menu);                                                             //Quita el menu
@@ -39,14 +39,11 @@ import javax.swing.JFrame;
 		game.setVisible(true);                                                          //Hace visisble al juego
 		frame.revalidate();
                 game.run();
-		//while(!game.Win){                                                               //Se seguira ejecutando hasta que la variable game sea true
-                                 
-                                 //Pausa el hilo, por 30 
-                   
-                //}
                if(game.Win)frame.setVisible(false);  
-               game.sound.clip.close();
+               frame.dispose();
+               game.sound.stop1();
                 System.out.println("Termino el juego");
+                System.exit(0);
 							
                 	
 } 
