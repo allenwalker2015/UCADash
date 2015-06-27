@@ -53,7 +53,6 @@ public class Sound extends Thread {
      
      public void stop1(){
                 clip.close();
-                interrupted();
      }
                
 }

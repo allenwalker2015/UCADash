@@ -24,7 +24,7 @@ public class Tubos {
 	//procures the Tubos image from Imgur
 	static BufferedImage img = null;{
 		try {
-			img = ImageIO.read(new File("/Imagenes/tubo2.png"));
+			img = ImageIO.read(new File(getClass().getResource("/Imagenes/tubo2.png").getPath()));
 					
 		} catch (IOException e) {
 			System.out.println("No sirve el tubo");		
@@ -45,7 +45,8 @@ public class Tubos {
 	public void move(){
 		x += speed;								
 		Rectangle wallBounds = new Rectangle(x, y, WIDTH, height);
-		if (wallBounds.intersects(Personaje.getBounds())) {
+                System.out.println("La X de el tubo es:" + x);
+                if (wallBounds.intersects(Personaje.getBounds())) {
                         sound.play();
 			Personaje.reset();
 			died();

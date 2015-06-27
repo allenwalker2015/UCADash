@@ -73,6 +73,7 @@ public class Nivel1 extends JPanel implements Runnable{
         @Override
             public void mousePressed(MouseEvent arg0) {               
 		personaje.jump(); 
+                Personaje.clicks++;
                 }
                	});
 	}
@@ -85,7 +86,6 @@ public class Nivel1 extends JPanel implements Runnable{
             monedas = 0;
             scrollX = 0;
             sound.stop1();
-            //sound.interrupt();
             this.sound = new Sound(getClass().getResource("/Sonidos/background.wav").getPath());
             sound.play();
             this.moneda3 = new Moneda(WIDTH + WIDTH/2 + WIDTH/6);
@@ -131,10 +131,14 @@ public class Nivel1 extends JPanel implements Runnable{
 	
 	@SuppressWarnings("static-access")
 	public void move(){
+            personaje.move();//mueve el personaje
             fondo.move();
             moneda1.move();   //hace el respectivo movimiento de la moneda
             moneda2.move();
             moneda3.move();
+            personaje.validation(wall);
+            personaje.validation(wall2);
+            personaje.validation(wall3);
             wall.move();	 //hace el respectivo movimiento de el tubo
             wall2.move();
             wall3.move();
@@ -143,7 +147,7 @@ public class Nivel1 extends JPanel implements Runnable{
             koopa3.move();
             procesarMonedas(); //Se encarga de sumar las monedas si se obtienen y crear nuevas monedas
             notover(); //Verifica que la monedas no esten encimadas en un obstaculo
-            personaje.move();//mueve el personaje
+           
             scrollX += Tubos.speed;	//scrolls the wee little background
             System.out.println("La posicion es:" + scrollX);
             if (scrollX <= -800){	//this loops the background around after it's done

@@ -41,7 +41,6 @@ import javax.swing.JFrame;
                 game.run();
                if(game.Win)frame.setVisible(false);  
                frame.dispose();
-               game.sound.stop1();
                 System.out.println("Termino el juego");
                 System.exit(0);
 							

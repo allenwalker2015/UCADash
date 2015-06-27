@@ -13,6 +13,8 @@ import javax.swing.Timer;
  
  
 public class Personaje {
+        private static boolean over;
+        private static int overY;
         Sound sound;
 	static int ANCHO = 30;									
 	static int ALTO =64;
@@ -22,6 +24,7 @@ public class Personaje {
 	static int speed = 2; 
         static File imgload;
         static boolean wantjumpping;
+        public static int clicks=0;
 	
 	
 	static Image img = null; {
@@ -39,27 +42,35 @@ public class Personaje {
 	//This is called when the bird jumps (on mouse click). It just temporarily sets the speed to -17 (arbitrary number), then is slowly taken back down because 
 	//of "gravity"
 	public void jump(){
-                //sound.stop1();
+                System.out.println("Los clicks son:" +clicks);
+                if(clicks<=2){
+                sound.interrupted();
                 sound= new Sound(getClass().getResource("/Sonidos/mb_jump.wav").getPath());
                 sound.play();
 		speed = - 17;
                 acceleration=1;
-                wantjumpping = true; 
+                wantjumpping = true;
+                }
 	}
 	
 	//all movement stuff is here 
 	public static void move(){
                     if(X <60)X++;
-		//only moves if the bird is between the top and bottom of the window
-                    if(y<=450 || wantjumpping){
-			speed += acceleration;								//Here's the gravity I was talking about the speed is just increased by 1 all the time, even after a jump
+                    if(over)y=overY;
+                    else{if(y<=450 || wantjumpping){
+			speed += acceleration;								
 			y += speed;
                     }
-                    if(y>450)y=450;
+                    if(y>450){ 
+                        y=450;
+                        clicks = 0;
+                    }
+                    
                     if(y<0){
                         reset();
                         Nivel1.dead=true;
                         y=450;
+                    }
                     }
                      
                 }
@@ -97,7 +108,11 @@ public class Personaje {
 		 return new Rectangle(X, y, ANCHO, ALTO);		//Gives a rectangle used to detect collisions in the Wall class
 		}
         public void stopsound(){
-        Sound.interrupted();
+            Sound.interrupted();
+        }
+        public static void isover(int y,boolean is){
+            overY = y;
+            over = is;
         }
 	
 }
