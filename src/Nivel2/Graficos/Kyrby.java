@@ -12,7 +12,7 @@ import javax.swing.ImageIcon;
 import javax.swing.Timer;
  
  
-public class Personaje {
+public class Kyrby {
         static boolean debug=false;
         private static boolean over;
         private static int overY;
@@ -33,7 +33,7 @@ public class Personaje {
         }
         
 		
-	public Personaje(){
+	public Kyrby(){
 		
 	}
         public void setY(){

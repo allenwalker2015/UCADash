@@ -8,24 +8,23 @@ import java.awt.Rectangle;
 import java.util.Random;
 import javax.swing.ImageIcon;
 
-public class Enemy1 {
-        boolean debug=false;
+public class BadCloud {
+        boolean debug=true;
         private Sound sound= new Sound("Sonidos/mb_touch.wav");
 	Random rnd = new Random();						//Genera el rand
 	public int x ;                                                          //Posicion en X del Enemy1
 	int initX;                                                              //Posicion inicial en X del Enemy1
         int y = rnd.nextInt(550);                                               //Setea la posicion en Y aleatoreamente
 	public static int speed = - 6;						//Velocidad de desplazamiento
-	int WIDTH = 45;                                                         //Ancho del personaje 
-	int height = 50;  
-        //Alto del personaje
+	int WIDTH = 100;                                                         //Ancho del personaje 
+	int height = 60;                                                        //Alto del personaje
 	static Image img = null; {
-                ImageIcon ii = new ImageIcon("Imagenes/enemy3.gif");
+                ImageIcon ii = new ImageIcon("Imagenes/enemy1.gif");
                 img = ii.getImage();
         }
 	
 	
-	public Enemy1(int i){								//Constructor de el koopa
+	public BadCloud(int i){								//Constructor de el koopa
 		this.x = i;
                 initX=i;
 	}
@@ -33,7 +32,7 @@ public class Enemy1 {
 	//draws the wall
 	public void paint(Graphics g){                                                  //Define lo que se va a pintar
 		g.drawImage(img, x, y, null);                                           //Pinta a el personaje
-		if(debug)g.drawRect(x, y,WIDTH, height);                                         //Pinta el cuadro de debug
+		if(debug)g.drawRect(x+18, y+4,WIDTH, height);                                         //Pinta el cuadro de debug
 	}
 	
 	public void move(){
@@ -44,9 +43,9 @@ public class Enemy1 {
 		Rectangle koopaBounds = new Rectangle(x, y, WIDTH, height);
 			
 		//Si el personaje choca contra este koopa
-		if (koopaBounds.intersects(Personaje.getBounds())) {
+		if (koopaBounds.intersects(Kyrby.getBounds())) {
                         sound.play();                                                       //Libera el sonido
-			Personaje.reset();                                                  //Resetea el personaje
+			Kyrby.reset();                                                  //Resetea el personaje
 			died();                                                             //Llama la funcion de muerte
                         sound= new Sound("Sonidos/mb_touch.wav");    //Recarga el sonido
 		}
@@ -67,7 +66,7 @@ public class Enemy1 {
 	}
         
         public Rectangle getBounds(){
-            Rectangle rect= new Rectangle(x, y, WIDTH, height);
+            Rectangle rect= new Rectangle(x+18, y+4, WIDTH, height);
             return rect;
         }
 }

@@ -9,7 +9,7 @@ import java.util.Random;
 import javax.swing.ImageIcon;
  
  
-public class Moneda{
+public class Star{
         boolean debug=false;
         private Sound sound= new Sound("Sonidos/coin.wav");
 	Random rnd = new Random();											
@@ -27,7 +27,7 @@ public class Moneda{
                 img = ii.getImage();
         }
 	
-	public Moneda(int i){								
+	public Star(int i){								
 		this.x = i;
 	}
 	
@@ -47,7 +47,7 @@ public class Moneda{
 		
 		Rectangle coinBounds = new Rectangle(x, y, WIDTH, height);
 		
-		if (coinBounds.intersects(Personaje.getBounds())) {
+		if (coinBounds.intersects(Kyrby.getBounds())) {
                         sound.play();
                         get=true;
                         sound= new Sound("Sonidos/coin.wav");

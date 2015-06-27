@@ -1,9 +1,9 @@
 package Nivel2;
 import Nivel1.Graficos.Fondo;
-import Nivel2.Graficos.Enemy1;
-import Nivel2.Graficos.Enemy2;
-import Nivel2.Graficos.Moneda;
-import Nivel2.Graficos.Personaje;
+import Nivel2.Graficos.Bird;
+import Nivel2.Graficos.BadCloud;
+import Nivel2.Graficos.Star;
+import Nivel2.Graficos.Kyrby;
 import UcaDash.Sound;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -23,16 +23,16 @@ public class Nivel2 extends JPanel implements Runnable{
         int numscreen=0;
         int GOAL= 5; //Se detiene una moneda antes
         Fondo fondo;
-	Personaje personaje = new Personaje();	
-        Enemy1 bird2;
-        Enemy1 bird1;
-        Enemy1 bird3;
-	Enemy2 pike1;
-        Enemy2 pike2;
-        Enemy2 pike3;
-        Moneda moneda1;
-        Moneda moneda2;
-        Moneda moneda3;
+	Kyrby personaje = new Kyrby();	
+        Bird bird2;
+        Bird bird1;
+        Bird bird3;
+	BadCloud pike1;
+        BadCloud pike2;
+        BadCloud pike3;
+        Star moneda1;
+        Star moneda2;
+        Star moneda3;
         public Sound sound = new Sound("Sonidos/background.wav");
         int Score;
         public boolean Win;
@@ -83,16 +83,16 @@ public class Nivel2 extends JPanel implements Runnable{
             sound.stop1();
             this.sound = new Sound("Sonidos/background2.wav");
             sound.play();
-            this.moneda3 = new Moneda(WIDTH + WIDTH/2 + WIDTH/6);
-            this.moneda2 = new Moneda(WIDTH + WIDTH/2);
-            this.moneda1 = new Moneda(WIDTH - WIDTH/2);
+            this.moneda3 = new Star(WIDTH + WIDTH/2 + WIDTH/6);
+            this.moneda2 = new Star(WIDTH + WIDTH/2);
+            this.moneda1 = new Star(WIDTH - WIDTH/2);
             dead = false;
-            this.bird1 = new Enemy1(WIDTH + (WIDTH / 4) + 50);
-            this.bird2 = new Enemy1(WIDTH + 50);
-            this.bird3 = new Enemy1(WIDTH + (WIDTH / 2) + 50);
-            this.pike1 = new Enemy2(WIDTH + (WIDTH / 4) + 50);
-            this.pike2 = new Enemy2(WIDTH + 50);
-            this.pike3 = new Enemy2(WIDTH + (WIDTH / 2) + 50);
+            this.bird1 = new Bird(WIDTH + (WIDTH / 4) + 50);
+            this.bird2 = new Bird(WIDTH + 50);
+            this.bird3 = new Bird(WIDTH + (WIDTH / 2) + 50);
+            this.pike1 = new BadCloud(WIDTH + (WIDTH / 4) + 50);
+            this.pike2 = new BadCloud(WIDTH + 50);
+            this.pike3 = new BadCloud(WIDTH + (WIDTH / 2) + 50);
    
         }
         public void  restart(){
@@ -138,7 +138,7 @@ public class Nivel2 extends JPanel implements Runnable{
             procesarMonedas(); //Se encarga de sumar las monedas si se obtienen y crear nuevas monedas
             notover(); //Verifica que la monedas no esten encimadas en un obstaculo
            
-            scrollX += Enemy1.speed;	//scrolls the wee little background
+            scrollX += Bird.speed;	//scrolls the wee little background
             System.out.println("La posicion es:" + scrollX);
             if (scrollX <= -800){	//this loops the background around after it's done
 			scrollX = 0;
@@ -160,7 +160,7 @@ public class Nivel2 extends JPanel implements Runnable{
                      | moneda1.getBounds().intersects(moneda2.getBounds())
                      | moneda1.getBounds().intersects(moneda3.getBounds())
                      ){
-                moneda1 = new Moneda(WIDTH + WIDTH/2);
+                moneda1 = new Star(WIDTH + WIDTH/2);
                 }    
             while(moneda2.getBounds().intersects(new Rectangle(0,HEIGHT - 100,800,84)) 
                     |moneda2.getBounds().intersects(bird1.getBounds()) 
@@ -169,7 +169,7 @@ public class Nivel2 extends JPanel implements Runnable{
                     |moneda2.getBounds().intersects(moneda1.getBounds())
                     |moneda2.getBounds().intersects(moneda3.getBounds())
                     ){
-                moneda2 = new Moneda(WIDTH + WIDTH/2 + WIDTH/4);
+                moneda2 = new Star(WIDTH + WIDTH/2 + WIDTH/4);
                 }
             while(moneda3.getBounds().intersects(new Rectangle(0,HEIGHT - 100,800,84)) 
                     |moneda3.getBounds().intersects(bird1.getBounds()) 
@@ -178,33 +178,33 @@ public class Nivel2 extends JPanel implements Runnable{
                     |moneda3.getBounds().intersects(moneda2.getBounds())
                     |moneda3.getBounds().intersects(moneda1.getBounds())
                     ){
-                moneda3 = new Moneda(WIDTH + WIDTH/2 +2*WIDTH/4);
+                moneda3 = new Star(WIDTH + WIDTH/2 +2*WIDTH/4);
                 }
             while(
                     bird1.getBounds().intersects(bird2.getBounds())
                     | bird1.getBounds().intersects(bird3.getBounds())
                     ){
-                bird1 = new Enemy1(WIDTH + (WIDTH / 4) + 50);
+                bird1 = new Bird(WIDTH + (WIDTH / 4) + 50);
             }
             
             while(
                     bird2.getBounds().intersects(bird1.getBounds())
                     | bird2.getBounds().intersects(bird3.getBounds())
                     ){
-                bird2 = new Enemy1(WIDTH + 50);
+                bird2 = new Bird(WIDTH + 50);
             }
            while(
                     bird3.getBounds().intersects(bird1.getBounds())
                     | bird3.getBounds().intersects(bird2.getBounds())
                     ){
-                bird3 = new Enemy1(WIDTH + (WIDTH / 2) + 50);
+                bird3 = new Bird(WIDTH + (WIDTH / 2) + 50);
             }       
         }
         public void procesarMonedas(){
             monedas+=moneda1.coin +moneda2.coin + moneda3.coin; //suma 1 al contador de monedas si se tomo la moneda1
-            if(moneda1.get) moneda1= new Moneda(WIDTH + WIDTH); //si se obtubo la moneda se crea otro nuevo objeto del tipo moneda
-            if(moneda2.get) moneda2= new Moneda(WIDTH + WIDTH/2 + WIDTH/4);
-            if(moneda3.get) moneda3= new Moneda(WIDTH + WIDTH/2 +2*WIDTH/4);
+            if(moneda1.get) moneda1= new Star(WIDTH + WIDTH); //si se obtubo la moneda se crea otro nuevo objeto del tipo moneda
+            if(moneda2.get) moneda2= new Star(WIDTH + WIDTH/2 + WIDTH/4);
+            if(moneda3.get) moneda3= new Star(WIDTH + WIDTH/2 +2*WIDTH/4);
             if(monedas>=GOAL && numscreen==10){
                 Win=true;
             }
