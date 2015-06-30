@@ -55,7 +55,7 @@ public class ACME {
             String url = "jdbc:mysql://localhost:3306/ucadash";
             String driver = "com.mysql.jdbc.Driver";
             String user="root";
-            String pass="alexander";
+            String pass="root";
             Class.forName(driver);
             Connection cnx=DriverManager.getConnection(url, user, pass);
             return cnx;

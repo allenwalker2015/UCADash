@@ -128,7 +128,7 @@ public class Nivel1 extends JPanel implements Runnable{
                 g.drawImage(floor, scrollX+677 ,HEIGHT - 84, null); //dibuja el piso
                 g.drawImage(floor, scrollX+(2* 677) ,HEIGHT - 84, null);  //dibuja el piso
  		g.setFont(new Font("comicsans", Font.BOLD, 39));       //Asigna el tipo de fuente a usar en los textos
- 		g.drawString("MONEDAS: " + monedas + "  PANTALLAS: " + numscreen,100,100);          //Muestra el contado de monedas
+ 		g.drawString(Login.poo_login.Login.name.toUpperCase() + ":" + "MONEDAS: " + monedas + "  PANTALLAS: " + numscreen,100,100);          //Muestra el contado de monedas
  		g.drawString(deathMessage, scrollX+ 200, 200);				//Muestra el mensaje de fiin del juego 
 	}
 	
@@ -149,15 +149,15 @@ public class Nivel1 extends JPanel implements Runnable{
             notover(); //Verifica que la monedas no esten encimadas en un obstaculo
            
             scrollX += Tubos.speed;	//scrolls the wee little background
-            System.out.println("La posicion es:" + scrollX);
+            //System.out.println("La posicion es:" + scrollX);
             if (scrollX <= -800){	//this loops the background around after it's done
 			scrollX = 0;
                         numscreen++;
                 }
             if (dead){				//this block essentially pushes the walls back 600 pixels on personaje death
-		wall.x = WIDTH + WIDTH;;
-		wall2.x = WIDTH + 2*(WIDTH / 3);
-                wall3.x = WIDTH + (WIDTH / 3);
+		//wall.x = WIDTH + WIDTH;;
+		//wall2.x = WIDTH + 2*(WIDTH / 3);
+                //wall3.x = WIDTH + (WIDTH / 3);
                 start();
 		dead = false;
 		}
@@ -222,9 +222,9 @@ public class Nivel1 extends JPanel implements Runnable{
             if(moneda1.get) moneda1= new Moneda(WIDTH + WIDTH); //si se obtubo la moneda se crea otro nuevo objeto del tipo moneda
             if(moneda2.get) moneda2= new Moneda(WIDTH + WIDTH/2 + WIDTH/4);
             if(moneda3.get) moneda3= new Moneda(WIDTH + WIDTH/2 +2*WIDTH/4);
-           if(monedas>=GOAL && numscreen==4){
+           if(monedas>=1 && numscreen==4){
                 Win=true;
             }
-            if(numscreen>=4 && monedas<GOAL){ start();}
+            if(numscreen>=10 && monedas<GOAL){ start();}
         }
 }

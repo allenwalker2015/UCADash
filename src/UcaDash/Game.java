@@ -1,5 +1,6 @@
 package UcaDash;
  
+import Login.poo_login.Login;
 import Nivel1.Nivel1;
 import Nivel2.Nivel2;
 import java.awt.CardLayout;
@@ -22,7 +23,13 @@ import javax.swing.JFrame;
 	}
  
 	public static void runnit() throws InterruptedException{
-		Container contentPane = frame.getContentPane();
+		Login lg = new Login();
+                lg.setVisible(true);
+                while(!lg.aceptar){
+                Thread.sleep(20);
+                }
+            
+                Container contentPane = frame.getContentPane();
                 CardLayout cardLayout = new CardLayout();
                 contentPane.setLayout(cardLayout);
                
@@ -48,24 +55,18 @@ import javax.swing.JFrame;
                          menu.move();
 		}
                 cardLayout.next(contentPane);
-                while(!level2.Win){   
+              
                 level1.Win=false;
                 level2.Win=false;
                 level1.start();
                 frame.revalidate();
                 level1.run();
                 cardLayout.next(contentPane);
-               if(level1.Win){
-                   level1.sound.stop1();
-                   //cardLayout.next(contentPane);
-                   level2.start(); 
-                   level2.run();
-                           }
-               level2.sound.stop1();
-               cardLayout.next(contentPane);
-               cardLayout.next(contentPane);
-               }
-               frame.dispose();
+                level1.sound.stop1();
+                level2.start(); 
+                level2.run();   
+                level2.sound.stop1(); 
+                frame.dispose();
                 System.out.println("Termino el juego");
                 System.exit(0);            	
 } 
