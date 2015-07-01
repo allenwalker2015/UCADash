@@ -43,9 +43,9 @@ public class Koopa {
 		Rectangle koopaBounds = new Rectangle(x, y, WIDTH, height);
 			
 		//Si el personaje choca contra este koopa
-		if (koopaBounds.intersects(Personaje.getBounds())) {
+		if (koopaBounds.intersects(Mario.getBounds())) {
                         sound.play();                                                       //Libera el sonido
-			Personaje.reset();                                                  //Resetea el personaje
+			Mario.reset();                                                  //Resetea el personaje
 			died();                                                             //Llama la funcion de muerte
                         sound= new Sound("Sonidos/mb_touch.wav");    //Recarga el sonido
 		}

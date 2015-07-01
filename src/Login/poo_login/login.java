@@ -4,6 +4,8 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 public class login extends javax.swing.JFrame {
+    public static String name;
+    public static boolean end=false;
     public login() {
         initComponents();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -136,11 +138,8 @@ public class login extends javax.swing.JFrame {
                    JOptionPane.showMessageDialog(rootPane, "Datos correctos!!\n Bienvenido!: "+txtUsername,"Correcto",1);
                      this.setVisible(false);
                      this.dispose();
-//                   try {
-//                       Game.main(txtUsername);
-//                   } catch (InterruptedException ex) {
-//                       Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
-//                   }
+                     name = txtUsername;
+                     end = true;
                }else{
                    JOptionPane.showMessageDialog(rootPane, "Contraseña incorrecta","Contraseña incorrecta",2);
                }
@@ -171,7 +170,7 @@ public class login extends javax.swing.JFrame {
             hom.setVisible(true);
     }//GEN-LAST:event_btnScoreActionPerformed
 
-    public static void main(String args[]) {
+    public static void start() {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {

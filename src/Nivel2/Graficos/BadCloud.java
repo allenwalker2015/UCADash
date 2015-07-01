@@ -16,8 +16,8 @@ public class BadCloud {
 	int initX;                                                              //Posicion inicial en X del Enemy1
         int y = rnd.nextInt(550);                                               //Setea la posicion en Y aleatoreamente
 	public static int speed = - 6;						//Velocidad de desplazamiento
-	int WIDTH = 100;                                                         //Ancho del personaje 
-	int height = 60;                                                        //Alto del personaje
+	int WIDTH = 70;                                                         //Ancho del personaje 
+	int height = 40;                                                        //Alto del personaje
 	static Image img = null; {
                 ImageIcon ii = new ImageIcon("Imagenes/enemy1.gif");
                 img = ii.getImage();
@@ -32,7 +32,7 @@ public class BadCloud {
 	//draws the wall
 	public void paint(Graphics g){                                                  //Define lo que se va a pintar
 		g.drawImage(img, x, y, null);                                           //Pinta a el personaje
-		if(debug)g.drawRect(x+18, y+4,WIDTH, height);                                         //Pinta el cuadro de debug
+		if(debug)g.drawRect(x+18+10, y+4+10,WIDTH, height);                                         //Pinta el cuadro de debug
 	}
 	
 	public void move(){
@@ -66,7 +66,7 @@ public class BadCloud {
 	}
         
         public Rectangle getBounds(){
-            Rectangle rect= new Rectangle(x+18, y+4, WIDTH, height);
+            Rectangle rect= new Rectangle(x+28, y+14, WIDTH, height);
             return rect;
         }
 }

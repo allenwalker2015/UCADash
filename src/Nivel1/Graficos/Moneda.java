@@ -47,7 +47,7 @@ public class Moneda{
 		
 		Rectangle coinBounds = new Rectangle(x, y, WIDTH, height);
 		
-		if (coinBounds.intersects(Personaje.getBounds())) {
+		if (coinBounds.intersects(Mario.getBounds())) {
                         sound.play();
                         get=true;
                         sound= new Sound("Sonidos/coin.wav");

@@ -8,14 +8,14 @@ import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 
 public final class Score extends javax.swing.JFrame {
-    private Login log;
+    private login log;
     private String user;
     DefaultTableModel model;
-    public Login getLog() {
+    public login getLog() {
         return log;
     }
 
-    public void setLog(Login log) {
+    public void setLog(login log) {
         this.log = log;
     }
 
@@ -138,7 +138,7 @@ public final class Score extends javax.swing.JFrame {
 
     private void btnAceptarScoreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarScoreActionPerformed
         // TODO add your handling code here:
-        Login log = new Login();
+        login log = new login();
         log.setVisible(true);
         this.setVisible(false);
         this.dispose();

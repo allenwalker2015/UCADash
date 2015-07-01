@@ -47,9 +47,9 @@ public class Tubos {
 		x += speed;								
 		Rectangle wallBounds = new Rectangle(x, y, WIDTH, height);
                 if(debug)System.out.println("La X de el tubo es:" + x);
-                if (wallBounds.intersects(Personaje.getBounds())) {
+                if (wallBounds.intersects(Mario.getBounds())) {
                         sound.play();
-			Personaje.reset();
+			Mario.reset();
 			died();
                         try{
                         sound= new Sound("Sonidos/mb_touch.wav");

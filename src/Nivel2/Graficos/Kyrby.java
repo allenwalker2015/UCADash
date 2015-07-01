@@ -47,7 +47,7 @@ public class Kyrby {
                 sound.interrupted();
                 sound= new Sound("Sonidos/mb_jump.wav");
                 sound.play();
-		speed = - 17;
+		speed = - 15;
                 acceleration=1;
                 }
                 

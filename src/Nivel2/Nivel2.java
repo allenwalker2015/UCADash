@@ -1,9 +1,9 @@
 package Nivel2;
 import Nivel1.Graficos.Fondo;
-import Nivel2.Graficos.BadCloud;
 import Nivel2.Graficos.Bird;
-import Nivel2.Graficos.Kyrby;
+import Nivel2.Graficos.BadCloud;
 import Nivel2.Graficos.Star;
+import Nivel2.Graficos.Kyrby;
 import UcaDash.Sound;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -52,7 +52,7 @@ public class Nivel2 extends JPanel implements Runnable{
                                 } catch (InterruptedException ex) {
                                     Logger.getLogger(Nivel2.class.getName()).log(Level.SEVERE, null, ex);
                                 }
-                                
+                                //if(dead)break;
                             }
                             
                             
@@ -208,6 +208,9 @@ public class Nivel2 extends JPanel implements Runnable{
             if(monedas>=GOAL && numscreen==10){
                 Win=true;
             }
-            if(numscreen>=10 && monedas<GOAL){ start();}
+            if(numscreen>=10 && monedas<GOAL){ 
+                start();
+                Nivel2.dead=true;
+            }
         }
 }

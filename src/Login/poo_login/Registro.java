@@ -116,7 +116,7 @@ public class Registro extends javax.swing.JFrame {
             try {
                 ACME.InsertUsuario(u1);
                 JOptionPane.showMessageDialog(rootPane, "registro exitoso", "Felicidades", 1);
-                Login log = new Login();
+                login log = new login();
                 this.dispose();
                 log.setVisible(true);
             } catch (SQLException | ClassNotFoundException ex) {

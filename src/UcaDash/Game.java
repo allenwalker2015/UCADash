@@ -1,6 +1,7 @@
 package UcaDash;
  
-import Login.poo_login.Login;
+import Login.poo_login.POO_login;
+import Login.poo_login.login;
 import Nivel1.Nivel1;
 import Nivel2.Nivel2;
 import java.awt.CardLayout;
@@ -23,19 +24,17 @@ import javax.swing.JFrame;
 	}
  
 	public static void runnit() throws InterruptedException{
-		Login lg = new Login();
-                lg.setVisible(true);
-                while(!lg.aceptar){
-                Thread.sleep(20);
-                }
-            
-                Container contentPane = frame.getContentPane();
+		Container contentPane = frame.getContentPane();
                 CardLayout cardLayout = new CardLayout();
                 contentPane.setLayout(cardLayout);
-               
+                login login = new login();
+                login.start();
+                while(!login.end){
+                     Thread.sleep(20);
+                }
 		final Menu menu = new Menu();							//the menu used in each instance
-		final Nivel1 level1 = new Nivel1(20);
-                final Nivel2 level2 = new Nivel2(20);    
+		final Nivel1 level1 = new Nivel1(25);
+                final Nivel2 level2 = new Nivel2(25);    
                  contentPane.add(menu, "MainMenu");
                  contentPane.add(level1, "Game1");
                  contentPane.add(level2, "Game2");
@@ -51,22 +50,30 @@ import javax.swing.JFrame;
 		while (!menu.startGame){                                                        //Espera hasta que se haga click en el menu
 			try{
                         Thread.sleep(60);
-                        }catch(Exception e){System.out.println("Error");}
-                         menu.move();
+                        }catch(Exception e){
+                            System.out.println("Error");
+                        }
+                        menu.move();
 		}
                 cardLayout.next(contentPane);
-              
+                //while(!level2.Win){   
                 level1.Win=false;
                 level2.Win=false;
                 level1.start();
                 frame.revalidate();
                 level1.run();
                 cardLayout.next(contentPane);
-                level1.sound.stop1();
-                level2.start(); 
-                level2.run();   
-                level2.sound.stop1(); 
-                frame.dispose();
+               //if(level1.Win){
+                   level1.sound.stop1();
+                   //cardLayout.next(contentPane);
+                   level2.start(); 
+                   level2.run();
+                 //          }
+               level2.sound.stop1();
+               //cardLayout.next(contentPane);
+               //cardLayout.next(contentPane);
+               //}
+               frame.dispose();
                 System.out.println("Termino el juego");
                 System.exit(0);            	
 } 
