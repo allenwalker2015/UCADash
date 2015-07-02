@@ -1,7 +1,6 @@
 package Nivel3.Graficos;
  
-import Nivel1.Graficos.*;
-import Nivel1.Nivel1;
+import Nivel3.Nivel3;
 import UcaDash.Sound;
 import java.awt.Graphics;
 import java.awt.Rectangle;
@@ -21,7 +20,7 @@ public class Tubos {
         int y = rnd.nextInt(100) + 400;	
 	public static int speed = - 6;							
 	int WIDTH = 50;									
-	int height = Nivel1.HEIGHT - 200;					
+	int height = Nivel3.HEIGHT - 200;					
 	int GAP = 100;			
 	//procures the Tubos image from Imgur
 	static BufferedImage img = null;{
@@ -58,8 +57,8 @@ public class Tubos {
 		}
 		if (x <= 0 - WIDTH){
 			x= initX;
-			y = rnd.nextInt(Nivel1.HEIGHT - 400) + 300;
-			height = Nivel1.HEIGHT;
+			y = rnd.nextInt(Nivel3.HEIGHT - 400) + 300;
+			height = Nivel3.HEIGHT;
 		}		
 	}
 	
@@ -68,7 +67,7 @@ public class Tubos {
 	public void died(){
 			//y = 500;
 			//height = Nivel1.HEIGHT - y;
-			Nivel1.dead = true;
+			Nivel3.dead = true;
                         //Nivel1.sound.clip.close();
 	}
         

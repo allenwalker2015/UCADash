@@ -51,11 +51,12 @@ public class Koopa {
 		}
 			
 		//Mueve el personaje 
+                if(Nivel1.numscreen < 8){
 		if (x <= 0 - WIDTH){
 			x= initX;
 			y = rnd.nextInt(100);
 			
-		}		
+		}}
 	}
 	
  

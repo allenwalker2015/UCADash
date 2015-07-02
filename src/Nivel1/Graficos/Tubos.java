@@ -55,7 +55,7 @@ public class Tubos {
                         sound= new Sound("Sonidos/mb_touch.wav");
                         }catch(Exception e){ System.out.println(e.getMessage());}
 		}
-		if (x <= 0 - WIDTH){
+		if (Nivel1.numscreen < 8 &  x <= 0 - WIDTH){
 			x= initX;
 			y = rnd.nextInt(Nivel1.HEIGHT - 400) + 300;
 			height = Nivel1.HEIGHT;

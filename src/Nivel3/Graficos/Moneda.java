@@ -1,7 +1,6 @@
 package Nivel3.Graficos;
  
-import Nivel1.Graficos.*;
-import Nivel1.Nivel1;
+import Nivel3.Nivel3;
 import UcaDash.Sound;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -15,7 +14,7 @@ public class Moneda{
         private Sound sound= new Sound("Sonidos/coin.wav");
 	Random rnd = new Random();											
 	int x ;											
-	int y =  rnd.nextInt(((Nivel1.HEIGHT-80) - 300) + 1) + 300;	
+	int y =  rnd.nextInt(((Nivel3.HEIGHT-80) - 300) + 1) + 300;	
 	static int speed = - 6;	
         public boolean get = false;//scrolling speed
         public  int coin = 0;
@@ -58,9 +57,9 @@ public class Moneda{
 			
 		
 		if (x <= 0 - WIDTH){
-			x = Nivel1.WIDTH;
+			x = Nivel3.WIDTH;
                         get=false;
-			y = rnd.nextInt(((Nivel1.HEIGHT-80) - 300) + 1) + 300;
+			y = rnd.nextInt(((Nivel3.HEIGHT-80) - 300) + 1) + 300;
 			
 		}		
 	}

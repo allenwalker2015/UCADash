@@ -5,7 +5,6 @@
  */
 package Nivel3.Graficos;
 
-import Nivel1.Graficos.*;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -18,8 +17,8 @@ import javax.imageio.ImageIO;
  */
 public class Fondo {
     int x = 0 ;											//La posicion inicial en X del fondo
-    int y = 0;                                                                                  //La posicion inicial en Y del fondo
-    int velocidad;                                                                 //Velocidad al la que se mueve 
+    int y = -200;                                                                                  //La posicion inicial en Y del fondo
+    int velocidad;                                                       //Velocidad al la que se mueve 
     File fond;
     BufferedImage img;
 	
@@ -37,12 +36,12 @@ public class Fondo {
     
     public void paint(Graphics g){
 		g.drawImage(img, x, 0, null);	//Se dibuja el primer fondo de pantalla			
-		g.drawImage(img, x + 800, 0, null); //Se dibuja el segundo exactamente despues esto da el efecto de scroll continuo								//top part 
+		g.drawImage(img, x + 1842, 0, null); //Se dibuja el segundo exactamente despues esto da el efecto de scroll continuo								//top part 
 		
 	}
     public void move(){
         x+=velocidad;
-        if (x <= -800){	//Hace el loop para repintar el fondo
+        if (x <= -1842){	//Hace el loop para repintar el fondo
 			x = 0;
                 }
     }

@@ -1,7 +1,6 @@
 package Nivel3.Graficos;
  
-import Nivel1.Graficos.*;
-import Nivel1.Nivel1;
+import Nivel3.Nivel3;
 import UcaDash.Sound;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -14,14 +13,14 @@ import javax.swing.Timer;
  
  
 public class Link {
-        static boolean debug=false;
+        static boolean debug=true;
         private static boolean over;
         private static int overY;
         Sound sound;
 	static int ANCHO = 30;									
 	static int ALTO =64;
         public static int X = -40;		  
-	static int y =  Nivel1.HEIGHT - 60 - 64;							
+	static int y =  Nivel3.HEIGHT - 60 - 64;							
 	static int acceleration = 1;								
 	static int speed = 2; 
         static File imgload;
@@ -35,7 +34,7 @@ public class Link {
         }
         
         static Image img2 = null; static {
-                ImageIcon ii = new ImageIcon("Imagenes/jumpmario1.png");
+                ImageIcon ii = new ImageIcon("Imagenes/link+kooko.gif");
                 img2 = ii.getImage();
         }
         static Image img3 = null; static {
@@ -81,7 +80,7 @@ public class Link {
                         }
                         if(y<0){
                             reset();
-                            Nivel1.dead=true;
+                            Nivel3.dead=true;
                             y=450;
                         }
                     }
@@ -95,15 +94,15 @@ public class Link {
 	public static void reset(){		            
             X = -40;
             speed = 2;
-            y =  Nivel1.HEIGHT - 60 - 64;
-            Nivel1.monedas = 0;
-            Nivel1.deathMessage = "Has muerto!!";
+            y =  Nivel3.HEIGHT - 60 - 64;
+            Nivel3.monedas = 0;
+            Nivel3.deathMessage = "Has muerto!!";
             
             Timer deathTimer;
             deathTimer = new Timer(3000, new ActionListener(){
                 @Override
                 public void actionPerformed(ActionEvent event){
-                    Nivel1.deathMessage = "";
+                    Nivel3.deathMessage = "";
                 };
             });
             

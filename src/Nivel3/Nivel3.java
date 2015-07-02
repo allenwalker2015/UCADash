@@ -1,10 +1,9 @@
 package Nivel3;
-import Nivel1.*;
-import Nivel1.Graficos.Fondo;
-import Nivel1.Graficos.Koopa;
-import Nivel1.Graficos.Moneda;
-import Nivel1.Graficos.Mario;
-import Nivel1.Graficos.Tubos;
+import Nivel3.Graficos.Fondo;
+import Nivel3.Graficos.Koopa;
+import Nivel3.Graficos.Link;
+import Nivel3.Graficos.Moneda;
+import Nivel3.Graficos.Tubos;
 import UcaDash.Sound;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -13,10 +12,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.imageio.ImageIO;
 import javax.swing.JPanel;
  
 @SuppressWarnings({"serial", "empty-statement"})
@@ -28,7 +25,7 @@ public class Nivel3 extends JPanel implements Runnable{
         int numscreen=0;
         int GOAL= 5; //Se detiene una moneda antes
         Fondo fondo;
-	Mario personaje;	
+	Link personaje;	
         Koopa koopa1;
         Koopa koopa2;
         Koopa koopa3;
@@ -73,17 +70,17 @@ public class Nivel3 extends JPanel implements Runnable{
         @Override
             public void mousePressed(MouseEvent arg0) {               
 		personaje.jump(); 
-                Mario.clicks++;
+                Link.clicks++;
                 }
                	});
 	}
    
         public final void start(){
-            this.personaje = new Mario();
+            this.personaje = new Link();
             personaje.reset();
             numscreen=0;
-            this.fondo = new Fondo(-1,"Imagenes/clouds2.jpg");
-            this.floor1 = new  File("Imagenes/floor.png");
+            this.fondo = new Fondo(-1,"Imagenes/background.jpg");
+            //this.floor1 = new  File("Imagenes/floor.png");
             this.Win = false;
             this.Score = 0;
             monedas = 0;
@@ -100,11 +97,12 @@ public class Nivel3 extends JPanel implements Runnable{
             this.koopa2 = new Koopa(WIDTH + (WIDTH / 4) + 50);
             this.koopa1 = new Koopa(WIDTH + 50);
             this.koopa3 = new Koopa(WIDTH + (WIDTH / 2) + 50);
-            try {
-                    floor = ImageIO.read(floor1);
-            } catch (IOException e) {
-                    System.out.println("No carga el piso :(");		//prints "WRONG BACKGROUND" if there is an issue obtaining the background
-            }
+          //  try {
+          //          floor = ImageIO.read(floor1);
+          //  } catch (IOException e) {
+                   // System.out.println("No carga el piso :(");		//prints "WRONG BACKGROUND" if there is an issue obtaining the background
+                    
+           // }
         }
         public void  restart(){
             start();
@@ -125,9 +123,9 @@ public class Nivel3 extends JPanel implements Runnable{
                 wall2.paint(g);                 //dibuja el segundo tubo
                 wall3.paint(g);//dibuja el tercer tubo
  		personaje.paint(g);			//dibuja el personaje
-                g.drawImage(floor, scrollX ,HEIGHT - 84, null); //Dibuja el piso
-                g.drawImage(floor, scrollX+677 ,HEIGHT - 84, null); //dibuja el piso
-                g.drawImage(floor, scrollX+(2* 677) ,HEIGHT - 84, null);  //dibuja el piso
+//                g.drawImage(floor, scrollX ,HEIGHT - 84, null); //Dibuja el piso
+//                g.drawImage(floor, scrollX+677 ,HEIGHT - 84, null); //dibuja el piso
+//                g.drawImage(floor, scrollX+(2* 677) ,HEIGHT - 84, null);  //dibuja el piso
  		g.setFont(new Font("comicsans", Font.BOLD, 39));       //Asigna el tipo de fuente a usar en los textos
  		g.drawString("MONEDAS: " + monedas + "  PANTALLAS: " + numscreen,100,100);          //Muestra el contado de monedas
  		g.drawString(deathMessage, scrollX+ 200, 200);				//Muestra el mensaje de fiin del juego 

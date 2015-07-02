@@ -1,45 +1,58 @@
 package Nivel2;
 import Nivel1.Graficos.Fondo;
-import Nivel2.Graficos.Bird;
 import Nivel2.Graficos.BadCloud;
-import Nivel2.Graficos.Star;
+import Nivel2.Graficos.Bird;
 import Nivel2.Graficos.Kyrby;
+import Nivel2.Graficos.Star;
 import UcaDash.Sound;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
  
 @SuppressWarnings({"serial", "empty-statement"})
 public class Nivel2 extends JPanel implements Runnable{
 	
-	public static int HEIGHT = 600;						
-	public static int WIDTH = 800;
-        int vel;
-        int numscreen=0;
-        int GOAL= 5; //Se detiene una moneda antes
-        Fondo fondo;
-	Kyrby personaje = new Kyrby();	
-        Bird bird2;
-        Bird bird1;
-        Bird bird3;
-	BadCloud pike1;
-        BadCloud pike2;
-        BadCloud pike3;
-        Star moneda1;
-        Star moneda2;
-        Star moneda3;
-        public Sound sound = new Sound("Sonidos/background.wav");
-        int Score;
-        public boolean Win;
-	public static int monedas;						
-	public static int scrollX;						
-	public static boolean dead = false;					
-	public static String deathMessage = "" ; 				
+    public static int HEIGHT = 600;						
+    public static int WIDTH = 800;
+    int vel;
+    int numscreen=0;
+    int GOAL= 5; //Se detiene una moneda antes
+    Fondo fondo;
+    Kyrby personaje = new Kyrby();	
+    Bird bird2;
+    Bird bird1;
+    Bird bird3;
+    BadCloud pike1;
+    BadCloud pike2;
+    BadCloud pike3;
+    Star moneda1;
+    Star moneda2;
+    Star moneda3;
+    public Sound sound = new Sound("Sonidos/background.wav");
+    int Score;
+    public boolean Win;
+    public static int monedas;						
+    public static int scrollX;						
+    public static boolean dead = false;					
+    public static String deathMessage = "" ; 				
+    private int intento;
+    private final Image winflag;
+    {
+                ImageIcon ii = new ImageIcon("Imagenes/win.jpg");
+                winflag = ii.getImage();
+        }
+    static Image star = null; {
+                ImageIcon ii = new ImageIcon("Imagenes/star.gif");
+                star = ii.getImage();
+        }
         
         
         @Override
@@ -102,22 +115,24 @@ public class Nivel2 extends JPanel implements Runnable{
 	@SuppressWarnings("static-access")      
         @Override
 	public void paint(Graphics g){
-		super.paint(g);
-                fondo.paint(g);
-		moneda1.paint(g);               //dibuja una moneda aleatoria
-		moneda2.paint(g);
-                moneda3.paint(g);
-                bird2.paint(g);                //Dibuja las aves
-                bird3.paint(g);
-                bird1.paint(g);
-                pike1.paint(g);                 //dibuja las puas
-                pike2.paint(g);
-                pike3.paint(g);
- 		personaje.paint(g);			//dibuja el personaje
-                
- 		g.setFont(new Font("comicsans", Font.BOLD, 39));       //Asigna el tipo de fuente a usar en los textos
- 		g.drawString("MONEDAS: " + monedas + "  PANTALLAS: " + numscreen,100,100);           //Muestra el contado de monedas
- 		g.drawString(deathMessage, 10, 200);				//Muestra el mensaje de fiin del juego 
+            super.paint(g);
+            fondo.paint(g);
+            moneda1.paint(g);               //dibuja una moneda aleatoria
+            moneda2.paint(g);
+            moneda3.paint(g);
+            bird2.paint(g);                //Dibuja las aves
+            bird3.paint(g);
+            bird1.paint(g);
+            pike1.paint(g);                 //dibuja las puas
+            pike2.paint(g);
+            pike3.paint(g);
+            personaje.paint(g);			//dibuja el personaje
+            g.setColor(Color.white);
+            g.setFont(new Font("arial", Font.PLAIN, 30));//Asigna el tipo de fuente a usar en los textos
+            g.drawImage(star,20,70-50,null);
+            g.drawString( "X"+ monedas + "  INTENTOS: " + intento,100-40,100-50);          //Muestra el contado de monedas
+            g.drawString(deathMessage, scrollX+ 200,200);				//Muestra el mensaje de fiin del juego 
+            if(numscreen>8)g.drawImage(winflag,scrollX + 800,0,null);//Si gana se pinta la bandera
 	}
 	
 	@SuppressWarnings("static-access")
@@ -145,7 +160,11 @@ public class Nivel2 extends JPanel implements Runnable{
                         numscreen++;
                 }
             
-            if(dead){dead=false;start();}
+            if(dead){
+                dead=false;
+                intento++;
+                start();
+            }
 	}
 	
 	public static void score(){

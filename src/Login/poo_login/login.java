@@ -9,6 +9,9 @@ public class login extends javax.swing.JFrame {
     public login() {
         initComponents();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);						//Configura la relatividad de la posicion de la ventana
+	setAutoRequestFocus(true);                                                //Hace que la ventanan  se sobreponga a las demas
+        setResizable(false);   
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

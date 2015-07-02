@@ -1,8 +1,8 @@
 package Nivel1;
 import Nivel1.Graficos.Fondo;
 import Nivel1.Graficos.Koopa;
-import Nivel1.Graficos.Moneda;
 import Nivel1.Graficos.Mario;
+import Nivel1.Graficos.Moneda;
 import Nivel1.Graficos.Tubos;
 import UcaDash.Sound;
 import java.awt.Color;
@@ -12,16 +12,13 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.font.TextAttribute;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.text.AttributedString;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
  
 @SuppressWarnings({"serial", "empty-statement"})
@@ -30,7 +27,7 @@ public class Nivel1 extends JPanel implements Runnable{
 	public static int HEIGHT = 600;						
 	public static int WIDTH = 800;
         int vel;
-        int numscreen=0;
+        public static int numscreen=0;
         int GOAL= 5; //Se detiene una moneda antes
         Fondo fondo;
 	Mario personaje;	
@@ -52,7 +49,10 @@ public class Nivel1 extends JPanel implements Runnable{
 	public static String deathMessage = "" ; 				
         File floor1;
         BufferedImage floor = null;
-        
+        static Image winflag = null; {
+                ImageIcon ii = new ImageIcon("Imagenes/win.jpg");
+                winflag = ii.getImage();
+        }
         static Image coins = null; {
                 ImageIcon ii = new ImageIcon("Imagenes/coin2.gif");
                 coins = ii.getImage();
@@ -76,8 +76,7 @@ public class Nivel1 extends JPanel implements Runnable{
    public Nivel1(int dif){
         start();
         vel = dif;
-                //mp3.play();
-		//this mouseAdapter just listens for clicks, whereupon it then tells the bird to jump 
+              
 	this.addMouseListener(new MouseAdapter(){
  
         @Override
@@ -123,38 +122,28 @@ public class Nivel1 extends JPanel implements Runnable{
 	@SuppressWarnings("static-access")      
         @Override
 	public void paint(Graphics g){
-		super.paint(g);
-                fondo.paint(g);
-		moneda1.paint(g);               //dibuja una moneda aleatoria
-		moneda2.paint(g);
-                moneda3.paint(g);
-                koopa1.paint(g);                //Dibuja los koopas
-                koopa3.paint(g);
-                koopa2.paint(g);
-                wall.paint(g);			//dibuja el primer tubo
-                wall2.paint(g);                 //dibuja el segundo tubo
-                wall3.paint(g);//dibuja el tercer tubo
- 		personaje.paint(g);			//dibuja el personaje
-                g.drawImage(floor, scrollX ,HEIGHT - 84, null); //Dibuja el piso
-                g.drawImage(floor, scrollX+677 ,HEIGHT - 84, null); //dibuja el piso
-                g.drawImage(floor, scrollX+(2* 677) ,HEIGHT - 84, null);  //dibuja el piso
-                g.setColor(Color.white);
-//                Font font = new Font("Serif", Font.PLAIN, 40);
-//                AttributedString as2 = new AttributedString("X"+ monedas);
-//                as2.addAttribute(TextAttribute.SIZE, 40);
-//                as2.addAttribute(TextAttribute.FONT, font);
-//                as2.addAttribute(TextAttribute.SUPERSCRIPT,TextAttribute.SUPERSCRIPT_SUPER, 5, 7);
-//                g.drawString(as2.getIterator(),100-40 ,100-50);
-                Font font = new Font("arial", Font.PLAIN, 50); 
-                 JLabel textLabel = new JLabel("X"+ monedas);
-                textLabel.setFont(font);
-                textLabel.setBounds(60,50, 300,100);
-                add(textLabel);
- 		      //Asigna el tipo de fuente a usar en los textos
- 		g.drawImage(coins,20,70-50,null);
-                g.drawString( "X"+ monedas + "  INTENTOS: " + intento,100-40,100-50);          //Muestra el contado de monedas
- 		g.drawString(deathMessage, scrollX+ 200,200);				//Muestra el mensaje de fiin del juego 
-	}
+            super.paint(g);
+            fondo.paint(g);
+            moneda1.paint(g);               //dibuja una moneda aleatoria
+            moneda2.paint(g);
+            moneda3.paint(g);
+            koopa1.paint(g);                //Dibuja los koopas
+            koopa3.paint(g);
+            koopa2.paint(g);
+            wall.paint(g);			//dibuja el primer tubo
+            wall2.paint(g);                 //dibuja el segundo tubo
+            wall3.paint(g);//dibuja el tercer tubo
+            personaje.paint(g);			//dibuja el personaje
+            g.drawImage(floor, scrollX ,HEIGHT - 84, null); //Dibuja el piso
+            g.drawImage(floor, scrollX+677 ,HEIGHT - 84, null); //dibuja el piso
+            g.drawImage(floor, scrollX+(2* 677) ,HEIGHT - 84, null);  //dibuja el piso
+            g.setColor(Color.white);
+            g.setFont(new Font("arial", Font.PLAIN, 30));//Asigna el tipo de fuente a usar en los textos
+            g.drawImage(coins,20,70-50,null);
+            g.drawString( "X"+ monedas + "  INTENTOS: " + intento,100-40,100-50);          //Muestra el contado de monedas
+            g.drawString(deathMessage, scrollX+ 200,200);				//Muestra el mensaje de fiin del juego 
+            if(numscreen>8)g.drawImage(winflag,scrollX + 800,0,null);//Si gana se pinta la bandera
+        }
 	
 	@SuppressWarnings("static-access")
 	public void move(){
@@ -172,22 +161,17 @@ public class Nivel1 extends JPanel implements Runnable{
             procesarMonedas(); //Se encarga de sumar las monedas si se obtienen y crear nuevas monedas
             notover(); //Verifica que la monedas no esten encimadas en un obstaculo
            
-            scrollX += Tubos.speed;	//scrolls the wee little background
+            scrollX += Tubos.speed;	//Velocidad a la que se mueve el piso
             System.out.println("La posicion es:" + scrollX);
-            if (scrollX <= -800){	//this loops the background around after it's done
+            if (scrollX <= -800){	//Genera el loop del fondo
 			scrollX = 0;
                         numscreen++;
                 }
                 if (dead){
-                intento++;//this block essentially pushes the walls back 600 pixels on personaje death
-                //wall.x = WIDTH + WIDTH;;
-		//wall2.x = WIDTH + 2*(WIDTH / 3);
-                //wall3.x = WIDTH + (WIDTH / 3);
+                intento++;//Se aumenta 1 al contador de intentos
                 start();
 		dead = false;
-		}
-		
-		
+		}	
 	}
 	
 	public static void score(){

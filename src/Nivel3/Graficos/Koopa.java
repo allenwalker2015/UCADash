@@ -1,7 +1,6 @@
 package Nivel3.Graficos;
  
-import Nivel1.Graficos.*;
-import Nivel1.Nivel1;
+import Nivel3.Nivel3;
 import UcaDash.Sound;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -63,7 +62,7 @@ public class Koopa {
 	//Se ejecuta cuando el personaje muere
 	public void died(){
 			y = rnd.nextInt(100) + 50;
-			Nivel1.dead = true;
+			Nivel3.dead = true;
 	}
         
         public Rectangle getBounds(){

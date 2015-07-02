@@ -5,11 +5,10 @@ import UcaDash.Sound;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
-import javax.swing.Timer;
  
  
 public class Personaje {
@@ -98,18 +97,11 @@ public class Personaje {
             speed = 2;
             y =  Nivel1.HEIGHT - 60 - 64;
             Nivel1.monedas = 0;
-            Nivel1.deathMessage = "Has muerto!!";
-            
-            Timer deathTimer;
-            deathTimer = new Timer(3000, new ActionListener(){
-                @Override
-                public void actionPerformed(ActionEvent event){
-                    Nivel1.deathMessage = "";
-                };
-            });
-            
-            deathTimer.start();
-            
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Personaje.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         
 	

@@ -56,7 +56,7 @@ public class Moneda{
                         }
 			
 		
-		if (x <= 0 - WIDTH){
+		if (Nivel1.numscreen < 7 &  x <= 0 - WIDTH){ ///CUANDO SE ESTA POR LLEGAR AL FINAL NO SE PONEN MAS MONEDAS
 			x = Nivel1.WIDTH;
                         get=false;
 			y = rnd.nextInt(((Nivel1.HEIGHT-80) - 300) + 1) + 300;
