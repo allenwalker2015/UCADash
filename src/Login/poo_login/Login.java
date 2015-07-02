@@ -3,12 +3,15 @@ import Login.Procesos.ACME;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-public class Login extends javax.swing.JFrame {
-    public boolean aceptar = false;
+public class login extends javax.swing.JFrame {
     public static String name;
-    public Login() {
+    public static boolean end=false;
+    public login() {
         initComponents();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);						//Configura la relatividad de la posicion de la ventana
+	setAutoRequestFocus(true);                                                //Hace que la ventanan  se sobreponga a las demas
+        setResizable(false);   
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -138,8 +141,8 @@ public class Login extends javax.swing.JFrame {
                    JOptionPane.showMessageDialog(rootPane, "Datos correctos!!\n Bienvenido!: "+txtUsername,"Correcto",1);
                      this.setVisible(false);
                      this.dispose();
-                     aceptar = true;
                      name = txtUsername;
+                     end = true;
                }else{
                    JOptionPane.showMessageDialog(rootPane, "Contraseña incorrecta","Contraseña incorrecta",2);
                }
@@ -170,11 +173,11 @@ public class Login extends javax.swing.JFrame {
             hom.setVisible(true);
     }//GEN-LAST:event_btnScoreActionPerformed
 
-    public static void main(String args[]) {
+    public static void start() {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new Login().setVisible(true);
+                new login().setVisible(true);
             }
         });
     }

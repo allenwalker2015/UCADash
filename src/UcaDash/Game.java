@@ -1,5 +1,6 @@
 package UcaDash;
  
+import Login.poo_login.login;
 import Nivel1.Nivel1;
 import Nivel2.Nivel2;
 import Nivel3.Nivel3;
@@ -26,11 +27,11 @@ import javax.swing.JFrame;
 		Container contentPane = frame.getContentPane();
                 CardLayout cardLayout = new CardLayout();
                 contentPane.setLayout(cardLayout);
-//                login login = new login();
-//                login.start();
-//                while(!login.end){
-//                     Thread.sleep(20);
-//                }
+                login login = new login();
+                login.start();
+                while(!login.end){
+                     Thread.sleep(20);
+                }
                 
 		final Menu menu = new Menu();							//the menu used in each instance
 		final Nivel1 level1 = new Nivel1(25);
