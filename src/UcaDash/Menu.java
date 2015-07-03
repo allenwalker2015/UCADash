@@ -1,5 +1,6 @@
 package UcaDash;
  
+import Login.poo_login.ScoreMenu;
 import java.awt.Graphics;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -21,7 +22,7 @@ public class Menu extends JPanel implements Runnable{
 	int highscore;
         Sound sound;
 
-        Prueba prueba= new Prueba();
+        ScoreMenu prueba= new ScoreMenu();
 	int i=0;
         int j= 0;
 	//gets the background from imgur
@@ -66,7 +67,7 @@ public class Menu extends JPanel implements Runnable{
                             if(e.getPoint().x >= 300 && e.getPoint().y >=400 && e.getPoint().x <= 375 && e.getPoint().y <=475)
 				startGame = true;
                              if(e.getPoint().x >= 425 && e.getPoint().y >=400 && e.getPoint().x <= 500 && e.getPoint().y <=475)
-                                 prueba.start();
+                                 if(!prueba.open)prueba.start();
 			}
                         
                         /*public void mouseClicked2(MouseEvent e) {

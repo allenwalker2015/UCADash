@@ -7,12 +7,18 @@ import Nivel3.Nivel3;
 import Nivel4.Nivel4;
 import java.awt.CardLayout;
 import java.awt.Container;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
  
  
 	public class Game {
  	static JFrame frame = new JFrame();	
-        
+         private static Image image=null;
+        static {
+                    ImageIcon ii = new ImageIcon("Imagenes/icon.png");
+                    image = ii.getImage();
+        }
         
     	public static void main (String args[]) throws InterruptedException{		
 		frame.setSize(Nivel1.WIDTH, Nivel1.HEIGHT);					//Se configura el tamaño de la JFrame
@@ -20,7 +26,8 @@ import javax.swing.JFrame;
 		frame.setLocationRelativeTo(null);						//Configura la relatividad de la posicion de la ventana
 		frame.setAutoRequestFocus(true);                                                //Hace que la ventanan  se sobreponga a las demas
                 frame.setResizable(false);                                                      //No se puede cambiar el tamaño de la pantalla
-		runnit();	// /r/running shoutout, also begins running the method below    //Corre el proceso de el menu y el juego
+                frame.setIconImage(image);
+                runnit();	// /r/running shoutout, also begins running the method below    //Corre el proceso de el menu y el juego
 		
 	}
  

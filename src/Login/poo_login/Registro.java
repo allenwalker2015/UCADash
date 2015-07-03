@@ -7,19 +7,26 @@ package Login.poo_login;
 
 import Login.Procesos.ACME;
 import Login.datos.Usuario;
+import java.awt.Image;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 public class Registro extends javax.swing.JFrame {
-
+    private static Image image=null;
+        static {
+                    ImageIcon ii = new ImageIcon("Imagenes/icon.png");
+                    image = ii.getImage();
+        }
     public Registro() {
         initComponents();
         setResizable(false);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setIconImage(image);
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

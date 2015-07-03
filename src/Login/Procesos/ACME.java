@@ -14,7 +14,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Vector;
-import javax.swing.plaf.ComponentUI;
 
 public class ACME {
     public static Boolean InsertUsuario(Usuario u1) throws SQLException, ClassNotFoundException {
