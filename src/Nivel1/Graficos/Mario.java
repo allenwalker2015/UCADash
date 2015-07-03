@@ -100,11 +100,11 @@ public class Mario {
 	
 	public static void paint(Graphics g){	
 		g.drawImage(img, X, y, null);
-                if(debug)g.drawRect(X+5, y,ANCHO, ALTO);//paints the bird's icon
+                if(debug)g.drawRect(X+5, y,ANCHO, ALTO);//Pinta a mario xD
 	}
 	
 	public static Rectangle getBounds(){
-		 return new Rectangle(X+5, y, ANCHO, ALTO);		//Gives a rectangle used to detect collisions in the Wall class
+		 return new Rectangle(X+5, y, ANCHO, ALTO);		//Devuelve un rectangulo el cual se usa para validar las colisiones
 		}
         public void stopsound(){
             Sound.interrupted();

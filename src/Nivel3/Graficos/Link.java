@@ -5,11 +5,8 @@ import UcaDash.Sound;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 import javax.swing.ImageIcon;
-import javax.swing.Timer;
  
  
 public class Link {
@@ -93,9 +90,7 @@ public class Link {
 	
 	public static void reset(){		            
             X = -40;
-            speed = 2;
-            y =  Nivel3.HEIGHT - 60 - 64;
-  
+            speed = 2;          
         }
         
 	

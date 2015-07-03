@@ -40,7 +40,7 @@ public class Nivel1 extends JPanel implements Runnable{
         Moneda moneda1;
         Moneda moneda2;
         Moneda moneda3;
-        public Sound sound = new Sound("Sonidos/background.wav");
+        public Sound sound = new Sound("Sonidos/background21.wav");
         int Score;
         public boolean Win;
 	public static int monedas;						
@@ -98,7 +98,7 @@ public class Nivel1 extends JPanel implements Runnable{
             monedas = 0;
             scrollX = 0;
             sound.stop1();
-            this.sound = new Sound("Sonidos/background.wav");
+            this.sound = new Sound("Sonidos/background21.wav");
             sound.play();
             this.moneda3 = new Moneda(WIDTH + WIDTH/2 + WIDTH/6);
             this.moneda2 = new Moneda(WIDTH + WIDTH/2);
@@ -206,11 +206,12 @@ public class Nivel1 extends JPanel implements Runnable{
                     ){
                 moneda3 = new Moneda(WIDTH + WIDTH/2 +2*WIDTH/4);
                 }
+            int i=0;
             while(
                     koopa2.getBounds().intersects(koopa1.getBounds())
                     | koopa2.getBounds().intersects(koopa3.getBounds())
                     ){
-                koopa2 = new Koopa(WIDTH + (WIDTH / 4) + 50);
+                koopa2 = new Koopa(WIDTH + (WIDTH / 4) + 50 + i++);
             }
             
             while(

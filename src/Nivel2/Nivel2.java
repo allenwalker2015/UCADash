@@ -98,7 +98,7 @@ public class Nivel2 extends JPanel implements Runnable{
             sound.play();
             this.moneda3 = new Star(WIDTH + WIDTH/2 + WIDTH/6);
             this.moneda2 = new Star(WIDTH + WIDTH/2);
-            this.moneda1 = new Star(WIDTH - WIDTH/2);
+            this.moneda1 = new Star(WIDTH + WIDTH/2+20);
             dead = false;
             this.bird1 = new Bird(WIDTH + (WIDTH / 4) + 50);
             this.bird2 = new Bird(WIDTH + 50);

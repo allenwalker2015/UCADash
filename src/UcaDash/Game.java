@@ -35,28 +35,29 @@ import javax.swing.JFrame;
                 
 		final Menu menu = new Menu();							//the menu used in each instance
 		final Nivel1 level1 = new Nivel1(25);
+                level1.sound.stop1();
                 final Nivel2 level2 = new Nivel2(20);
+                level2.sound.stop1();
                 final Nivel3 level3 = new Nivel3(15);
+                level3.sound.stop1();
                 final Nivel4 level4 = new Nivel4(15);
+                level4.sound.stop1();
                 contentPane.add(menu, "MainMenu");
                 contentPane.add(level1, "Game1");
                 contentPane.add(level2, "Game2");
                 contentPane.add(level3, "Game3");
                 contentPane.add(level4, "Game4");
-                level1.sound.stop1();
-                level2.sound.stop1();
-                level3.sound.stop1();
-                level4.sound.stop1();
                 frame.setVisible(true);
 		frame.revalidate();                                                             //Hace que se muestre el menu
 		frame.repaint();
+//                level1.Win=false;
+//                level2.Win=false;
+//                level3.Win=false;
+//                level4.Win=false;
                 menu.run();
                 cardLayout.next(contentPane);
                 //while(!level2.Win){   
-                level1.Win=false;
-                level2.Win=false;
-                level3.Win=false;
-                level4.Win=false;
+                
                 level1.start();
                 level1.run();
                 cardLayout.next(contentPane);
@@ -71,6 +72,9 @@ import javax.swing.JFrame;
                 cardLayout.next(contentPane);
                 level3.start();
                 level3.run();
+                cardLayout.next(contentPane);
+                level4.start();
+                level4.run();
                 frame.dispose();
                 System.out.println("Termino el juego");
                 System.exit(0);            	

@@ -8,12 +8,14 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
  
 
 public class Tubos {
         boolean debug=false;
-        private Sound sound= new Sound("Sonidos/mb_touch.wav");
+        private Sound sound= new Sound("Sonidos/dead.wav");
 	Random rnd = new Random();						
 	public int x ;											
 	int initX;
@@ -49,7 +51,14 @@ public class Tubos {
                 if(debug)System.out.println("La X de el tubo es:" + x);
                 if (wallBounds.intersects(Mario.getBounds())) {
                         sound.play();
-			Mario.reset();
+                        Mario.reset();
+                        //Nivel1.sound.stop1();
+                          try {
+                                Thread.sleep(2200);
+                            } catch (InterruptedException ex) {
+                                Logger.getLogger(Koopa.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+			
 			died();
                         try{
                         sound= new Sound("Sonidos/mb_touch.wav");

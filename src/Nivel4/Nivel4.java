@@ -3,7 +3,6 @@ import Nivel4.Graficos.Cherry;
 import Nivel4.Graficos.Fondo;
 import Nivel4.Graficos.Packman;
 import Nivel4.Graficos.PhantomBlue;
-
 import UcaDash.Sound;
 import java.awt.Color;
 import java.awt.Font;
@@ -26,7 +25,7 @@ public class Nivel4 extends JPanel implements Runnable{
 	public static int WIDTH = 800;
         int vel;
         public static int numscreen=0;
-        int GOAL= 5; //Se detiene una moneda antes
+        int GOAL= 10; //Se detiene una moneda antes
         Fondo fondo;
         Packman personaje;	
         PhantomBlue bat1;

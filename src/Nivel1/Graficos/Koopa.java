@@ -6,11 +6,13 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 
 public class Koopa {
         boolean debug=false;
-        private Sound sound= new Sound("Sonidos/mb_touch.wav");
+        private Sound sound= new Sound("Sonidos/dead.wav");
 	Random rnd = new Random();						//Genera el rand
 	public int x ;                                                          //Posicion en X del Koopa
 	int initX;                                                              //Posicion inicial en X del Koopa
@@ -45,7 +47,12 @@ public class Koopa {
 		//Si el personaje choca contra este koopa
 		if (koopaBounds.intersects(Mario.getBounds())) {
                         sound.play();                                                       //Libera el sonido
-			Mario.reset();                                                  //Resetea el personaje
+                            try {
+                                Thread.sleep(2200);
+                            } catch (InterruptedException ex) {
+                                Logger.getLogger(Koopa.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        Mario.reset();                                                  //Resetea el personaje
 			died();                                                             //Llama la funcion de muerte
                         sound= new Sound("Sonidos/mb_touch.wav");    //Recarga el sonido
 		}

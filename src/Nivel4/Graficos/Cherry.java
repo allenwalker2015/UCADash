@@ -14,7 +14,7 @@ public class Cherry{
         private Sound sound= new Sound("Sonidos/coin.wav");
 	Random rnd = new Random();											
 	int x ;											
-	int y =  rnd.nextInt(((Nivel4.HEIGHT-80) - 300) + 1) + 300;	
+	int y =  rnd.nextInt(500)+50;	
 	static int speed = - 6;	
         public boolean get = false;//scrolling speed
         public  int coin = 0;
