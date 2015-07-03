@@ -28,7 +28,7 @@ public class Nivel1 extends JPanel implements Runnable{
 	public static int WIDTH = 800;
         int vel;
         public static int numscreen=0;
-        int GOAL= 5; //Se detiene una moneda antes
+        int GOAL= 6; //Se detiene una moneda antes
         Fondo fondo;
 	Mario personaje;	
         Koopa koopa1;
@@ -102,7 +102,7 @@ public class Nivel1 extends JPanel implements Runnable{
             sound.play();
             this.moneda3 = new Moneda(WIDTH + WIDTH/2 + WIDTH/6);
             this.moneda2 = new Moneda(WIDTH + WIDTH/2);
-            this.moneda1 = new Moneda(WIDTH - WIDTH/2);
+            this.moneda1 = new Moneda(WIDTH + WIDTH/2);
             this.wall3 = new Tubos(WIDTH + (WIDTH / 3));
             this.wall2 = new Tubos(WIDTH + 2*(WIDTH / 3));
             this.wall = new Tubos(WIDTH + (WIDTH));

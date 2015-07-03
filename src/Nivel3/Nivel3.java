@@ -1,12 +1,14 @@
 package Nivel3;
+import Nivel3.Graficos.Bat;
 import Nivel3.Graficos.Fondo;
-import Nivel3.Graficos.Koopa;
 import Nivel3.Graficos.Link;
-import Nivel3.Graficos.Moneda;
-import Nivel3.Graficos.Tubos;
+import Nivel3.Graficos.Pikes;
+import Nivel3.Graficos.Rupy;
 import UcaDash.Sound;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -14,6 +16,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
  
 @SuppressWarnings({"serial", "empty-statement"})
@@ -22,20 +25,23 @@ public class Nivel3 extends JPanel implements Runnable{
 	public static int HEIGHT = 600;						
 	public static int WIDTH = 800;
         int vel;
-        int numscreen=0;
-        int GOAL= 5; //Se detiene una moneda antes
+        public static int numscreen=0;
+        int GOAL= 7; //Se detiene una moneda antes
         Fondo fondo;
 	Link personaje;	
-        Koopa koopa1;
-        Koopa koopa2;
-        Koopa koopa3;
-	Tubos wall;				
-	Tubos wall2;	
-        Tubos wall3;
-        Moneda moneda1;
-        Moneda moneda2;
-        Moneda moneda3;
-        public Sound sound = new Sound("Sonidos/background.wav");
+        Bat bat1;
+        Bat bat2;
+        Bat bat3;
+        Pikes koopa1;
+        Pikes koopa2;
+        Pikes koopa3;
+	Pikes wall;				
+	Pikes wall2;	
+        Pikes wall3;
+        Rupy moneda1;
+        Rupy moneda2;
+        Rupy moneda3;
+        public Sound sound = new Sound("Sonidos/background3.wav");
         int Score;
         public boolean Win;
 	public static int monedas;						
@@ -44,6 +50,17 @@ public class Nivel3 extends JPanel implements Runnable{
 	public static String deathMessage = "" ; 				
         File floor1;
         BufferedImage floor = null;
+        static Image rupy = null;
+        {
+                ImageIcon ii = new ImageIcon("Imagenes/rupy.gif");
+                rupy = ii.getImage();
+        }
+        private final int intento=0;
+        private final Image winflag;
+        {
+                    ImageIcon ii = new ImageIcon("Imagenes/win.jpg");
+                    winflag = ii.getImage();
+        }
         
         @Override
     public void run(){
@@ -79,24 +96,27 @@ public class Nivel3 extends JPanel implements Runnable{
             this.personaje = new Link();
             personaje.reset();
             numscreen=0;
-            this.fondo = new Fondo(-1,"Imagenes/background.jpg");
+            this.fondo = new Fondo(-4,"Imagenes/background.jpg");
             //this.floor1 = new  File("Imagenes/floor.png");
             this.Win = false;
             this.Score = 0;
             monedas = 0;
             scrollX = 0;
             sound.stop1();
-            this.sound = new Sound("Sonidos/background.wav");
+            this.sound = new Sound("Sonidos/background3.wav");
             sound.play();
-            this.moneda3 = new Moneda(WIDTH + WIDTH/2 + WIDTH/6);
-            this.moneda2 = new Moneda(WIDTH + WIDTH/2);
-            this.moneda1 = new Moneda(WIDTH - WIDTH/2);
-            this.wall3 = new Tubos(WIDTH + (WIDTH / 3));
-            this.wall2 = new Tubos(WIDTH + 2*(WIDTH / 3));
-            this.wall = new Tubos(WIDTH + (WIDTH));
-            this.koopa2 = new Koopa(WIDTH + (WIDTH / 4) + 50);
-            this.koopa1 = new Koopa(WIDTH + 50);
-            this.koopa3 = new Koopa(WIDTH + (WIDTH / 2) + 50);
+            this.moneda3 = new Rupy(WIDTH + WIDTH/2 + WIDTH/6);
+            this.moneda2 = new Rupy(WIDTH + WIDTH/2);
+            this.moneda1 = new Rupy(WIDTH + WIDTH/2 + WIDTH/4);
+            this.wall3 = new Pikes(WIDTH + (WIDTH / 3));
+           
+            this.wall = new Pikes(WIDTH + (WIDTH));
+            this.koopa2 = new Pikes(WIDTH + (WIDTH / 4) + 50);
+            this.koopa1 = new Pikes(WIDTH + 50);
+            this.koopa3 = new Pikes(WIDTH + (WIDTH / 2) + 50);
+           
+            this.bat1 = new Bat(WIDTH + 50);
+            this.bat3 = new Bat(WIDTH + (WIDTH / 2) + 50);
           //  try {
           //          floor = ImageIO.read(floor1);
           //  } catch (IOException e) {
@@ -111,26 +131,33 @@ public class Nivel3 extends JPanel implements Runnable{
 	@SuppressWarnings("static-access")      
         @Override
 	public void paint(Graphics g){
-		super.paint(g);
-                fondo.paint(g);
-		moneda1.paint(g);               //dibuja una moneda aleatoria
-		moneda2.paint(g);
-                moneda3.paint(g);
-                koopa1.paint(g);                //Dibuja los koopas
-                koopa3.paint(g);
-                koopa2.paint(g);
-                wall.paint(g);			//dibuja el primer tubo
-                wall2.paint(g);                 //dibuja el segundo tubo
-                wall3.paint(g);//dibuja el tercer tubo
- 		personaje.paint(g);			//dibuja el personaje
-//                g.drawImage(floor, scrollX ,HEIGHT - 84, null); //Dibuja el piso
-//                g.drawImage(floor, scrollX+677 ,HEIGHT - 84, null); //dibuja el piso
-//                g.drawImage(floor, scrollX+(2* 677) ,HEIGHT - 84, null);  //dibuja el piso
- 		g.setFont(new Font("comicsans", Font.BOLD, 39));       //Asigna el tipo de fuente a usar en los textos
- 		g.drawString("MONEDAS: " + monedas + "  PANTALLAS: " + numscreen,100,100);          //Muestra el contado de monedas
- 		g.drawString(deathMessage, scrollX+ 200, 200);				//Muestra el mensaje de fiin del juego 
-	}
-	
+            super.paint(g);
+            fondo.paint(g);
+            moneda1.paint(g);               //dibuja una moneda aleatoria
+            moneda2.paint(g);
+            moneda3.paint(g);
+            koopa1.paint(g);                //Dibuja los koopas
+            koopa3.paint(g);
+            koopa2.paint(g);
+            wall.paint(g);			//dibuja el primer tubo
+              //dibuja el segundo tubo
+            wall3.paint(g);//dibuja el tercer tubo
+            bat1.paint(g);
+         
+            bat3.paint(g);
+            personaje.paint(g);			//dibuja el personaje
+            
+//            g.drawImage(floor, scrollX ,HEIGHT - 84, null); //Dibuja el piso
+//            g.drawImage(floor, scrollX+677 ,HEIGHT - 84, null); //dibuja el piso
+//            g.drawImage(floor, scrollX+(2* 677) ,HEIGHT - 84, null);  //dibuja el piso
+            g.setColor(Color.white);
+            g.setFont(new Font("arial", Font.PLAIN, 30));//Asigna el tipo de fuente a usar en los textos 
+            g.drawImage(rupy,20,70-50,null);
+            g.drawString( "X"+ monedas + "  INTENTOS: " + intento,100-40,100-50);          //Muestra el contado de monedas
+            g.drawString(deathMessage, scrollX+ 200,200);				//Muestra el mensaje de fiin del juego 
+            if(numscreen>8)g.drawImage(winflag,scrollX + 800,0,null);//Si gana se pinta la bandera
+        }
+        
 	@SuppressWarnings("static-access")
 	public void move(){
             personaje.move();//mueve el personaje
@@ -139,15 +166,17 @@ public class Nivel3 extends JPanel implements Runnable{
             moneda2.move();
             moneda3.move();
             wall.move();	 //hace el respectivo movimiento de el tubo
-            wall2.move();
+  
             wall3.move();
             koopa1.move();
-            koopa2.move();
+       
             koopa3.move();
+            bat1.move();
+            bat3.move();
             procesarMonedas(); //Se encarga de sumar las monedas si se obtienen y crear nuevas monedas
             notover(); //Verifica que la monedas no esten encimadas en un obstaculo
            
-            scrollX += Tubos.speed;	//scrolls the wee little background
+            scrollX += Pikes.speed;	//scrolls the wee little background
             System.out.println("La posicion es:" + scrollX);
             if (scrollX <= -800){	//this loops the background around after it's done
 			scrollX = 0;
@@ -176,7 +205,7 @@ public class Nivel3 extends JPanel implements Runnable{
                      | moneda1.getBounds().intersects(moneda2.getBounds())
                      | moneda1.getBounds().intersects(moneda3.getBounds())
                      ){
-                moneda1 = new Moneda(WIDTH + WIDTH/2);
+                moneda1 = new Rupy(WIDTH + WIDTH/2);
                 }    
             while(moneda2.getBounds().intersects(new Rectangle(0,HEIGHT - 100,800,84)) 
                     |moneda2.getBounds().intersects(wall.getBounds()) 
@@ -185,7 +214,7 @@ public class Nivel3 extends JPanel implements Runnable{
                     |moneda2.getBounds().intersects(moneda1.getBounds())
                     |moneda2.getBounds().intersects(moneda3.getBounds())
                     ){
-                moneda2 = new Moneda(WIDTH + WIDTH/2 + WIDTH/4);
+                moneda2 = new Rupy(WIDTH + WIDTH/2 + WIDTH/4);
                 }
             while(moneda3.getBounds().intersects(new Rectangle(0,HEIGHT - 100,800,84)) 
                     |moneda3.getBounds().intersects(wall.getBounds()) 
@@ -194,33 +223,33 @@ public class Nivel3 extends JPanel implements Runnable{
                     |moneda3.getBounds().intersects(moneda2.getBounds())
                     |moneda3.getBounds().intersects(moneda1.getBounds())
                     ){
-                moneda3 = new Moneda(WIDTH + WIDTH/2 +2*WIDTH/4);
+                moneda3 = new Rupy(WIDTH + WIDTH/2 +2*WIDTH/4);
                 }
             while(
                     koopa2.getBounds().intersects(koopa1.getBounds())
                     | koopa2.getBounds().intersects(koopa3.getBounds())
                     ){
-                koopa2 = new Koopa(WIDTH + (WIDTH / 4) + 50);
+                koopa2 = new Pikes(WIDTH + (WIDTH / 4) + 50);
             }
             
             while(
                     koopa1.getBounds().intersects(koopa2.getBounds())
                     | koopa1.getBounds().intersects(koopa3.getBounds())
                     ){
-                koopa1 = new Koopa(WIDTH + 50);
+                koopa1 = new Pikes(WIDTH + 50);
             }
            while(
                     koopa3.getBounds().intersects(koopa2.getBounds())
                     | koopa3.getBounds().intersects(koopa1.getBounds())
                     ){
-                koopa3 = new Koopa(WIDTH + (WIDTH / 2) + 50);
+                koopa3 = new Pikes(WIDTH + (WIDTH / 2) + 50);
             }       
         }
         public void procesarMonedas(){
             monedas+=moneda1.coin +moneda2.coin + moneda3.coin; //suma 1 al contador de monedas si se tomo la moneda1
-            if(moneda1.get) moneda1= new Moneda(WIDTH + WIDTH); //si se obtubo la moneda se crea otro nuevo objeto del tipo moneda
-            if(moneda2.get) moneda2= new Moneda(WIDTH + WIDTH/2 + WIDTH/4);
-            if(moneda3.get) moneda3= new Moneda(WIDTH + WIDTH/2 +2*WIDTH/4);
+            if(moneda1.get) moneda1= new Rupy(WIDTH + WIDTH); //si se obtubo la moneda se crea otro nuevo objeto del tipo moneda
+            if(moneda2.get) moneda2= new Rupy(WIDTH + WIDTH/2 + WIDTH/4);
+            if(moneda3.get) moneda3= new Rupy(WIDTH + WIDTH/2 +2*WIDTH/4);
            if(monedas>=GOAL && numscreen==10){
                 Win=true;
             }

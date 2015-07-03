@@ -5,11 +5,8 @@ import UcaDash.Sound;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 import javax.swing.ImageIcon;
-import javax.swing.Timer;
  
  
 public class Kyrby {
@@ -76,19 +73,7 @@ public class Kyrby {
             X = -90;
             speed = 2;
             y =  Nivel2.HEIGHT/2;
-            Nivel2.monedas = 0;
-            Nivel2.deathMessage = "Has muerto!!";
-            
-            Timer deathTimer;
-            deathTimer = new Timer(3000, new ActionListener(){
-                @Override
-                public void actionPerformed(ActionEvent event){
-                    Nivel2.deathMessage = "";
-                };
-            });
-            
-            deathTimer.start();
-            
+            Nivel2.monedas = 0;         
         }
         
 	

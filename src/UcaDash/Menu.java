@@ -11,7 +11,7 @@ import javax.swing.JPanel;
  
 ///ESTA PANTALLA DESAPARECE AL HACER CLICK
  
-public class Menu extends JPanel{
+public class Menu extends JPanel implements Runnable{
 	private static final long serialVersionUID = 1L;
 	int highscore;
         Sound sound;
@@ -60,4 +60,15 @@ public class Menu extends JPanel{
 		g.drawImage(img, i, j-3, null);
                 g.drawImage(text, 150, 250, null);
 	}
+        @Override
+        public void run(){
+        while (!startGame){                                                        //Espera hasta que se haga click en el menu
+			try{
+                        Thread.sleep(60);
+                        }catch(Exception e){
+                            System.out.println("Error");
+                        }
+                        move();
+		}
+        }
 }

@@ -24,7 +24,7 @@ public class Nivel2 extends JPanel implements Runnable{
     public static int WIDTH = 800;
     int vel;
     int numscreen=0;
-    int GOAL= 5; //Se detiene una moneda antes
+    int GOAL= 6; //Se detiene una moneda antes
     Fondo fondo;
     Kyrby personaje = new Kyrby();	
     Bird bird2;
@@ -43,7 +43,7 @@ public class Nivel2 extends JPanel implements Runnable{
     public static int scrollX;						
     public static boolean dead = false;					
     public static String deathMessage = "" ; 				
-    private int intento;
+    private int intento=0;
     private final Image winflag;
     {
                 ImageIcon ii = new ImageIcon("Imagenes/win.jpg");

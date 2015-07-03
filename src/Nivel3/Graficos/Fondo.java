@@ -17,7 +17,7 @@ import javax.imageio.ImageIO;
  */
 public class Fondo {
     int x = 0 ;											//La posicion inicial en X del fondo
-    int y = -200;                                                                                  //La posicion inicial en Y del fondo
+    int y = -220;                                                                                  //La posicion inicial en Y del fondo
     int velocidad;                                                       //Velocidad al la que se mueve 
     File fond;
     BufferedImage img;
@@ -35,8 +35,8 @@ public class Fondo {
     }
     
     public void paint(Graphics g){
-		g.drawImage(img, x, 0, null);	//Se dibuja el primer fondo de pantalla			
-		g.drawImage(img, x + 1842, 0, null); //Se dibuja el segundo exactamente despues esto da el efecto de scroll continuo								//top part 
+		g.drawImage(img, x, y, null);	//Se dibuja el primer fondo de pantalla			
+		g.drawImage(img, x + 1842, y, null); //Se dibuja el segundo exactamente despues esto da el efecto de scroll continuo								//top part 
 		
 	}
     public void move(){

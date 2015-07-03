@@ -95,19 +95,7 @@ public class Link {
             X = -40;
             speed = 2;
             y =  Nivel3.HEIGHT - 60 - 64;
-            Nivel3.monedas = 0;
-            Nivel3.deathMessage = "Has muerto!!";
-            
-            Timer deathTimer;
-            deathTimer = new Timer(3000, new ActionListener(){
-                @Override
-                public void actionPerformed(ActionEvent event){
-                    Nivel3.deathMessage = "";
-                };
-            });
-            
-            deathTimer.start();
-            
+  
         }
         
 	

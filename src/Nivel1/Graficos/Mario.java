@@ -5,11 +5,8 @@ import UcaDash.Sound;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 import javax.swing.ImageIcon;
-import javax.swing.Timer;
  
  
 public class Mario {
@@ -98,18 +95,6 @@ public class Mario {
             speed = 2;
             y =  Nivel1.HEIGHT - 60 - 64;
             Nivel1.monedas = 0;
-            Nivel1.deathMessage = "Has muerto!!";
-            
-            Timer deathTimer;
-            deathTimer = new Timer(3000, new ActionListener(){
-                @Override
-                public void actionPerformed(ActionEvent event){
-                    Nivel1.deathMessage = "";
-                };
-            });
-            
-            deathTimer.start();
-            
         }
         
 	
