@@ -1,18 +1,26 @@
 package Login.poo_login;
 
 import Login.Procesos.ACME;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 public class login extends javax.swing.JFrame {
     public static String name;
     public static boolean end=false;
+     private static Image image=null;
+        static {
+                    ImageIcon ii = new ImageIcon("Imagenes/icon.png");
+                    image = ii.getImage();
+        }
     public login() {
         initComponents();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);						//Configura la relatividad de la posicion de la ventana
 	setAutoRequestFocus(true);                                                //Hace que la ventanan  se sobreponga a las demas
-        setResizable(false);   
+        setResizable(false);
+        setIconImage(image);
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
