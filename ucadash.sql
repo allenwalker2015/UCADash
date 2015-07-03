@@ -4,31 +4,20 @@ create database ucadash;
 
 use ucadash;
 
-create table USUARIO
-(IdUsuario int not null AUTO_INCREMENT, 
+create table usuario(
 NomUsuario varchar(25), 
 PassUsuario varchar (25),
-Score int,
-Dificultad int,
-IdNivel int,
- PRIMARY KEY (IdUsuario)
+Score1 int,
+Score2 int,
+Score3 int,
+Score4 int,
+ PRIMARY KEY (NomUsuario)
 );
 
-create table NIVEL
-(IdNivel int not null,
-NumNIvel int not null,
-PRIMARY KEY (IdNivel)
-);
-
-ALTER TABLE USUARIO ADD
-CONSTRAINT FK_USUARIO_NIVEL
-FOREIGN KEY (IdNivel)
-REFERENCES NIVEL (IdNivel);
-
-
-INSERT INTO NIVEL (IdNivel, NumNIvel)
-values (1,1), (2,2),(3,3),(4,4);
-
-INSERT INTO USUARIO(NomUsuario, PassUsuario, Score, Dificultad, IdNivel)
-values ("uca","uca",2,1,1),("fuck", "fuck", 1,1,2);
+INSERT INTO usuario(NomUsuario, PassUsuario, Score1, Score2, Score3, Score4)
+		    values ("uca","uca",1,2,3,4),
+                           ("fuck","fuck",4,3,2,1),
+                           ("booby","bobby",3,6,4,3),
+                           ("hot","hot",3,4,6,5),
+                           ("winniepofe","pofepoo",2,4,7,2);
 

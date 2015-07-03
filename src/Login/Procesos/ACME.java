@@ -14,6 +14,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Vector;
+import javax.swing.plaf.ComponentUI;
 
 public class ACME {
     public static Boolean InsertUsuario(Usuario u1) throws SQLException, ClassNotFoundException {
@@ -33,13 +34,64 @@ public class ACME {
         }
     }
     
- public static Boolean ActualizarScore(int score,Usuario u1) throws SQLException, ClassNotFoundException {
+ public static Boolean ActualizarScore1(int score,String u1) throws SQLException, ClassNotFoundException {
         try {            
             Connection cnx=getCnx();
-            String query = "UPDATE usuario SET Score=? WHERE NomUsuario=?";
+            String query = "UPDATE usuario SET Score1=? WHERE NomUsuario=?";
             PreparedStatement ps = cnx.prepareStatement(query);
             ps.setInt(1, score);
-            ps.setString(2,u1.getUsername());
+            ps.setString(2,u1);
+            ps.executeUpdate();
+
+            return true;
+            
+        }catch (SQLException ex) {
+            System.out.println("Error:" + ex.getMessage());
+            return false;
+        }
+    }
+ 
+ public static Boolean ActualizarScore2(int score,String u1) throws SQLException, ClassNotFoundException {
+        try {            
+            Connection cnx=getCnx();
+            String query = "UPDATE usuario SET Score2=? WHERE NomUsuario=?";
+            PreparedStatement ps = cnx.prepareStatement(query);
+            ps.setInt(1, score);
+            ps.setString(2,u1);
+            ps.executeUpdate();
+
+            return true;
+            
+        }catch (SQLException ex) {
+            System.out.println("Error:" + ex.getMessage());
+            return false;
+        }
+    }
+ 
+  public static Boolean ActualizarScore3(int score,String u1) throws SQLException, ClassNotFoundException {
+        try {            
+            Connection cnx=getCnx();
+            String query = "UPDATE usuario SET Score3=? WHERE NomUsuario=?";
+            PreparedStatement ps = cnx.prepareStatement(query);
+            ps.setInt(1, score);
+            ps.setString(2,u1);
+            ps.executeUpdate();
+
+            return true;
+            
+        }catch (SQLException ex) {
+            System.out.println("Error:" + ex.getMessage());
+            return false;
+        }
+    }
+  
+   public static Boolean ActualizarScore4(int score,String u1) throws SQLException, ClassNotFoundException {
+        try {            
+            Connection cnx=getCnx();
+            String query = "UPDATE usuario SET Score=4? WHERE NomUsuario=?";
+            PreparedStatement ps = cnx.prepareStatement(query);
+            ps.setInt(1, score);
+            ps.setString(2,u1);
             ps.executeUpdate();
 
             return true;
@@ -122,8 +174,62 @@ public class ACME {
         }
         return reg;
  }
+
  
+ public static int verificarScore1(String u1) throws SQLException{
+    int score;
+     Connection cnx=getCnx();
+    String query="SELECT Score1 FROM usuario WHERE NomUsuario=?";
+    PreparedStatement ps=cnx.prepareStatement(query);
+    ps.setString(1, u1);
+    ResultSet rs = ps.executeQuery();
+    if(rs.next()){
+        score = rs.getInt("Score1");
+        return score;
+    }else
+        return 0;
+ }
  
+ public static int verificarScore2(String u1) throws SQLException{
+    int score;
+     Connection cnx=getCnx();
+    String query="SELECT Score2 FROM usuario WHERE NomUsuario=?";
+    PreparedStatement ps=cnx.prepareStatement(query);
+    ps.setString(1, u1);
+    ResultSet rs = ps.executeQuery();
+    if(rs.next()){
+        score = rs.getInt("Score2");
+        return score;
+    }else
+        return 0;
+ }
  
+ public static int verificarScore3(String u1) throws SQLException{
+    int score;
+     Connection cnx=getCnx();
+    String query="SELECT Score3 FROM usuario WHERE NomUsuario=?";
+    PreparedStatement ps=cnx.prepareStatement(query);
+    ps.setString(1, u1);
+    ResultSet rs = ps.executeQuery();
+    if(rs.next()){
+        score = rs.getInt("Score3");
+        return score;
+    }else
+        return 0;
+ }
+ 
+ public static int verificarScore4(String u1) throws SQLException{
+    int score;
+     Connection cnx=getCnx();
+    String query="SELECT Score4 FROM usuario WHERE NomUsuario=?";
+    PreparedStatement ps=cnx.prepareStatement(query);
+    ps.setString(1, u1);
+    ResultSet rs = ps.executeQuery();
+    if(rs.next()){
+        score = rs.getInt("Score4");
+        return score;
+    }else
+        return 0;
+ }
  
 }

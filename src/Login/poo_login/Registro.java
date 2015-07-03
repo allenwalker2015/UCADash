@@ -17,6 +17,8 @@ public class Registro extends javax.swing.JFrame {
 
     public Registro() {
         initComponents();
+        setResizable(false);
+        setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     @SuppressWarnings("unchecked")
@@ -111,20 +113,23 @@ public class Registro extends javax.swing.JFrame {
         pass.append(PassField.getPassword());
         txtContra=pass.toString();
         if(!nombre.equals("") && !txtContra.equals("")){
-            u1.setUsername(nombre);
-            u1.setPass(txtContra);
-            try {
-                ACME.InsertUsuario(u1);
-                JOptionPane.showMessageDialog(rootPane, "registro exitoso", "Felicidades", 1);
-                login log = new login();
-                this.dispose();
-                log.setVisible(true);
-            } catch (SQLException | ClassNotFoundException ex) {
-                Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
-            }                
-            
+            if(ACME.buscarUsuario(txtContra)==false){
+                u1.setUsername(nombre);
+                u1.setPass(txtContra);
+                try {
+                    ACME.InsertUsuario(u1);
+                    JOptionPane.showMessageDialog(rootPane, "registro exitoso", "Felicidades", 1);
+                    login log = new login();
+                    this.dispose();
+                    log.setVisible(true);
+                } catch (SQLException | ClassNotFoundException ex) {
+                    Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
+                } 
+            }else{
+                JOptionPane.showMessageDialog(rootPane, "Este usuario ya existe", "Ya existe", 0);
+            }               
         }else{
-            JOptionPane.showMessageDialog(rootPane, "registro fallido", "fallo", 0);
+            JOptionPane.showMessageDialog(rootPane, "Registro fallido", "Fallo", 0);
         }
             
         

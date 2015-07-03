@@ -1,5 +1,6 @@
 package UcaDash;
  
+import Login.poo_login.login;
 import Nivel1.Nivel1;
 import Nivel2.Nivel2;
 import Nivel3.Nivel3;
@@ -27,12 +28,11 @@ import javax.swing.JFrame;
 		Container contentPane = frame.getContentPane();
                 CardLayout cardLayout = new CardLayout();
                 contentPane.setLayout(cardLayout);
-//                login login = new login();
-//                login.start();
-//                while(!login.end){
-//                     Thread.sleep(20);
-//                }
-                
+                login login = new login();
+                login.start();
+                while(!login.end){
+                     Thread.sleep(20);
+                }
 		final Menu menu = new Menu();							//the menu used in each instance
 		final Nivel1 level1 = new Nivel1(25);
                 level1.sound.stop1();
@@ -40,7 +40,7 @@ import javax.swing.JFrame;
                 level2.sound.stop1();
                 final Nivel3 level3 = new Nivel3(15);
                 level3.sound.stop1();
-                final Nivel4 level4 = new Nivel4(15);
+                final Nivel4 level4 = new Nivel4(10);
                 level4.sound.stop1();
                 contentPane.add(menu, "MainMenu");
                 contentPane.add(level1, "Game1");
@@ -50,13 +50,8 @@ import javax.swing.JFrame;
                 frame.setVisible(true);
 		frame.revalidate();                                                             //Hace que se muestre el menu
 		frame.repaint();
-//                level1.Win=false;
-//                level2.Win=false;
-//                level3.Win=false;
-//                level4.Win=false;
                 menu.run();
                 cardLayout.next(contentPane);
-                //while(!level2.Win){   
                 
                 level1.start();
                 level1.run();
@@ -78,5 +73,5 @@ import javax.swing.JFrame;
                 frame.dispose();
                 System.out.println("Termino el juego");
                 System.exit(0);            	
-} 
+    } 
 }

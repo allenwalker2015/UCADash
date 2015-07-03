@@ -90,7 +90,8 @@ public class Link {
 	
 	public static void reset(){		            
             X = -40;
-            speed = 2;          
+            speed = 2; 
+            y= Nivel3.HEIGHT - 60 - 64;
         }
         
 	

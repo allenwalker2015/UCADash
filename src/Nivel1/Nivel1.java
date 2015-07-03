@@ -10,6 +10,8 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
@@ -74,10 +76,52 @@ public class Nivel1 extends JPanel implements Runnable{
     }
 	
    public Nivel1(int dif){
-        start();
-        vel = dif;
+      
               
-	this.addMouseListener(new MouseAdapter(){
+	
+         this.addKeyListener(new KeyAdapter() {
+
+                    @Override
+                    public void keyTyped(KeyEvent e) {
+                      displayInfo(e);
+                    }
+
+                    @Override
+                    public void keyPressed(KeyEvent e) {
+                       int key = e.getKeyCode();
+                        if (key == KeyEvent.VK_UP) {
+                     //identCosa=1;
+                        personaje.jump();
+                        Mario.clicks++;
+                        }
+                       }
+
+                    @Override
+                    public void keyReleased(KeyEvent e) {
+                        displayInfo(e);
+                    }
+
+                    private void displayInfo(KeyEvent e) {
+                      
+                    //You should only rely on the key char if the event
+                    //is a key typed event.
+                    int id = e.getID();
+                    String keyString;
+                    if (id == KeyEvent.KEY_TYPED) {
+                        char c = e.getKeyChar();
+                        keyString = "key character = '" + c + "'";
+                    } else {
+                        int keyCode = e.getKeyCode();
+                        keyString = "key code = " + keyCode
+                                + " ("
+                                + KeyEvent.getKeyText(keyCode)
+                                + ")";
+
+                                }
+                        System.out.println("La tecla es:" + keyString);
+                   }
+                });
+         this.addMouseListener(new MouseAdapter(){
  
         @Override
             public void mousePressed(MouseEvent arg0) {               
@@ -85,6 +129,9 @@ public class Nivel1 extends JPanel implements Runnable{
                 Mario.clicks++;
                 }
                	});
+         
+        start();
+        vel = dif;
 	}
    
         public final void start(){
@@ -162,7 +209,7 @@ public class Nivel1 extends JPanel implements Runnable{
             notover(); //Verifica que la monedas no esten encimadas en un obstaculo
            
             scrollX += Tubos.speed;	//Velocidad a la que se mueve el piso
-            System.out.println("La posicion es:" + scrollX);
+            //System.out.println("La posicion es:" + scrollX);
             if (scrollX <= -800){	//Genera el loop del fondo
 			scrollX = 0;
                         numscreen++;

@@ -156,7 +156,7 @@ public class Nivel4 extends JPanel implements Runnable{
             notover(); //Verifica que la monedas no esten encimadas en un obstaculo
            
             scrollX += PhantomBlue.speed;	//scrolls the wee little background
-            System.out.println("La posicion es:" + scrollX);
+            //System.out.println("La posicion es:" + scrollX);
             if (scrollX <= -800){	//this loops the background around after it's done
 			scrollX = 0;
                         numscreen++;
