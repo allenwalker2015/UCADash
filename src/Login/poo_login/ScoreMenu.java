@@ -210,6 +210,7 @@ public final class ScoreMenu extends javax.swing.JFrame {
             }
         });
 
+        btnN1.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         btnN1.setText("Nivel1");
         btnN1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -217,6 +218,7 @@ public final class ScoreMenu extends javax.swing.JFrame {
             }
         });
 
+        btnN2.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         btnN2.setText("Nivel2");
         btnN2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -224,6 +226,7 @@ public final class ScoreMenu extends javax.swing.JFrame {
             }
         });
 
+        btnN3.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         btnN3.setText("Nivel3");
         btnN3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -231,6 +234,7 @@ public final class ScoreMenu extends javax.swing.JFrame {
             }
         });
 
+        btnN4.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         btnN4.setText("Nivel4");
         btnN4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -10,7 +10,7 @@ import javax.swing.ImageIcon;
  
  
 public class Link {
-        static boolean debug=true;
+        static boolean debug=false;
         private static boolean over;
         private static int overY;
         Sound sound;

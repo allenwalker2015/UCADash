@@ -35,12 +35,7 @@ import javax.swing.JFrame;
 		Container contentPane = frame.getContentPane();
                 CardLayout cardLayout = new CardLayout();
                 contentPane.setLayout(cardLayout);
-                login login = new login();
-                login.start();
-                while(!login.end){
-                     Thread.sleep(20);
-                }
-		final Menu menu = new Menu();							//the menu used in each instance
+                final Menu menu = new Menu();							//the menu used in each instance
 		final Nivel1 level1 = new Nivel1(25);
                 level1.sound.stop1();
                 final Nivel2 level2 = new Nivel2(20);
@@ -54,12 +49,24 @@ import javax.swing.JFrame;
                 contentPane.add(level2, "Game2");
                 contentPane.add(level3, "Game3");
                 contentPane.add(level4, "Game4");
+                login login = new login();
+                do{
+                    login.start();
+                    while(!login.end){
+                         Thread.sleep(20);
+                    }
+                    login.end=false;
+                    frame.setVisible(true);
+                    frame.revalidate();                                                             //Hace que se muestre el menu
+                    frame.repaint();
+                    menu.startGame=false;
+                    menu.return1=false;
+                    menu.run();
+                    frame.setVisible(false);
+                    
+                }while(!login.return1 &&  !menu.startGame);
                 frame.setVisible(true);
-		frame.revalidate();                                                             //Hace que se muestre el menu
-		frame.repaint();
-                menu.run();
                 cardLayout.next(contentPane);
-                
                 level1.start();
                 level1.run();
                 cardLayout.next(contentPane);

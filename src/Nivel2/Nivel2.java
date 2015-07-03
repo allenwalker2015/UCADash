@@ -1,4 +1,6 @@
 package Nivel2;
+import Login.Procesos.ACME;
+import Login.poo_login.login;
 import Nivel1.Graficos.Fondo;
 import Nivel2.Graficos.BadCloud;
 import Nivel2.Graficos.Bird;
@@ -12,6 +14,7 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -45,6 +48,7 @@ public class Nivel2 extends JPanel implements Runnable{
     public static String deathMessage = "" ; 				
     private int intento=0;
     private final Image winflag;
+    private boolean pause;
     {
                 ImageIcon ii = new ImageIcon("Imagenes/win.jpg");
                 winflag = ii.getImage();
@@ -53,21 +57,38 @@ public class Nivel2 extends JPanel implements Runnable{
                 ImageIcon ii = new ImageIcon("Imagenes/star.gif");
                 star = ii.getImage();
         }
+     static Image pp = null; {
+                ImageIcon ii = new ImageIcon("Imagenes/pause.jpg");
+                pp = ii.getImage();
+        }
         
         
         @Override
     public void run(){
                             while(!Win){
+                                repaint();              //Ejecuta el metodo de repintar del juego  
+                                if(!pause){
                                 try {
-                                    repaint();                                                //Ejecuta el metodo de repintar del juego
+                                            
                                     move();
                                     Thread.sleep(vel);
                                 } catch (InterruptedException ex) {
                                     Logger.getLogger(Nivel2.class.getName()).log(Level.SEVERE, null, ex);
                                 }
                                 //if(dead)break;
+                                }
                             }
-                            
+            try {
+                if(ACME.verificarScore2(login.name)<monedas){
+                    try {
+                        ACME.ActualizarScore2(monedas,login.name);
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(Nivel2.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(Nivel2.class.getName()).log(Level.SEVERE, null, ex);
+            }
                             
     }
 	
@@ -79,10 +100,14 @@ public class Nivel2 extends JPanel implements Runnable{
 	this.addMouseListener(new MouseAdapter(){
  
         @Override
-            public void mousePressed(MouseEvent arg0) {               
+            public void mousePressed(MouseEvent e) {
+                 if(e.getPoint().x >= 700 && e.getPoint().y >=20 && e.getPoint().x <= 760 && e.getPoint().y <= 80){
+                     pause = !pause;
+                 }
+                else{ 
 		personaje.jump(); 
-              
                 }
+            }
                	});
 	}
    
@@ -115,6 +140,7 @@ public class Nivel2 extends JPanel implements Runnable{
 	@SuppressWarnings("static-access")      
         @Override
 	public void paint(Graphics g){
+            if(!pause){
             super.paint(g);
             fondo.paint(g);
             moneda1.paint(g);               //dibuja una moneda aleatoria
@@ -132,8 +158,10 @@ public class Nivel2 extends JPanel implements Runnable{
             g.drawImage(star,20,70-50,null);
             g.drawString( "X"+ monedas + "  INTENTOS: " + intento,100-40,100-50);          //Muestra el contado de monedas
             g.drawString(deathMessage, scrollX+ 200,200);				//Muestra el mensaje de fiin del juego 
+            g.drawImage(pp, 700, 20, null);
             if(numscreen>8)g.drawImage(winflag,scrollX + 800,0,null);//Si gana se pinta la bandera
-	}
+            }
+        }
 	
 	@SuppressWarnings("static-access")
 	public void move(){

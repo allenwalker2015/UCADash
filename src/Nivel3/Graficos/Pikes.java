@@ -9,7 +9,7 @@ import java.util.Random;
 import javax.swing.ImageIcon;
 
 public class Pikes {
-        boolean debug=true;
+        boolean debug=false;
         private Sound sound= new Sound("Sonidos/mb_touch.wav");
 	Random rnd = new Random();						//Genera el rand
 	public int x ;                                                          //Posicion en X del Koopa

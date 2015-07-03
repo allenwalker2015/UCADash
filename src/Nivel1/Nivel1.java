@@ -1,4 +1,6 @@
 package Nivel1;
+import Login.Procesos.ACME;
+import Login.poo_login.login;
 import Nivel1.Graficos.Fondo;
 import Nivel1.Graficos.Koopa;
 import Nivel1.Graficos.Mario;
@@ -10,13 +12,12 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -26,6 +27,7 @@ import javax.swing.JPanel;
 @SuppressWarnings({"serial", "empty-statement"})
 public class Nivel1 extends JPanel implements Runnable{
 	int intento=0;
+        boolean pause = false;
 	public static int HEIGHT = 600;						
 	public static int WIDTH = 800;
         int vel;
@@ -59,74 +61,50 @@ public class Nivel1 extends JPanel implements Runnable{
                 ImageIcon ii = new ImageIcon("Imagenes/coin2.gif");
                 coins = ii.getImage();
         }
+         static Image pp = null; {
+                ImageIcon ii = new ImageIcon("Imagenes/pause.jpg");
+                pp = ii.getImage();
+        }
         
         @Override
     public void run(){
                             while(!Win){
+                                repaint(); //Ejecuta el metodo de repintar del juego
+                                if(!pause){
                                 try {
-                                    repaint();                                                //Ejecuta el metodo de repintar del juego
+                                                         
                                     move();
                                     Thread.sleep(vel);
                                 } catch (InterruptedException ex) {
                                     Logger.getLogger(Nivel1.class.getName()).log(Level.SEVERE, null, ex);
                                 }
+                               }
                             }
-                            
+            try {
+                if(ACME.verificarScore1(login.name)<monedas){
+                    try {
+                        ACME.ActualizarScore1(monedas,login.name);
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(Nivel1.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(Nivel1.class.getName()).log(Level.SEVERE, null, ex);
+            }
                             
     }
 	
    public Nivel1(int dif){
-      
-              
-	
-         this.addKeyListener(new KeyAdapter() {
-
-                    @Override
-                    public void keyTyped(KeyEvent e) {
-                      displayInfo(e);
-                    }
-
-                    @Override
-                    public void keyPressed(KeyEvent e) {
-                       int key = e.getKeyCode();
-                        if (key == KeyEvent.VK_UP) {
-                     //identCosa=1;
-                        personaje.jump();
-                        Mario.clicks++;
-                        }
-                       }
-
-                    @Override
-                    public void keyReleased(KeyEvent e) {
-                        displayInfo(e);
-                    }
-
-                    private void displayInfo(KeyEvent e) {
-                      
-                    //You should only rely on the key char if the event
-                    //is a key typed event.
-                    int id = e.getID();
-                    String keyString;
-                    if (id == KeyEvent.KEY_TYPED) {
-                        char c = e.getKeyChar();
-                        keyString = "key character = '" + c + "'";
-                    } else {
-                        int keyCode = e.getKeyCode();
-                        keyString = "key code = " + keyCode
-                                + " ("
-                                + KeyEvent.getKeyText(keyCode)
-                                + ")";
-
-                                }
-                        System.out.println("La tecla es:" + keyString);
-                   }
-                });
          this.addMouseListener(new MouseAdapter(){
- 
         @Override
-            public void mousePressed(MouseEvent arg0) {               
+            public void mousePressed(MouseEvent e) {  
+                 if(e.getPoint().x >= 700 && e.getPoint().y >=20 && e.getPoint().x <= 760 && e.getPoint().y <= 80){
+                     pause = !pause;
+                 }
+                else{ 
 		personaje.jump(); 
                 Mario.clicks++;
+                }
                 }
                	});
          
@@ -169,6 +147,7 @@ public class Nivel1 extends JPanel implements Runnable{
 	@SuppressWarnings("static-access")      
         @Override
 	public void paint(Graphics g){
+            if(!pause){
             super.paint(g);
             fondo.paint(g);
             moneda1.paint(g);               //dibuja una moneda aleatoria
@@ -189,7 +168,9 @@ public class Nivel1 extends JPanel implements Runnable{
             g.drawImage(coins,20,70-50,null);
             g.drawString( "X"+ monedas + "  INTENTOS: " + intento,100-40,100-50);          //Muestra el contado de monedas
             g.drawString(deathMessage, scrollX+ 200,200);				//Muestra el mensaje de fiin del juego 
+            g.drawImage(pp, 700, 20, null);
             if(numscreen>8)g.drawImage(winflag,scrollX + 800,0,null);//Si gana se pinta la bandera
+            }
         }
 	
 	@SuppressWarnings("static-access")
@@ -226,6 +207,7 @@ public class Nivel1 extends JPanel implements Runnable{
                 
 	}
         public void notover(){
+            int i=0;
              while(moneda1.getBounds().intersects(new Rectangle(0,HEIGHT - 100,800,84)) 
                      |moneda1.getBounds().intersects(wall.getBounds()) 
                      | moneda1.getBounds().intersects(wall2.getBounds()) 
@@ -233,7 +215,7 @@ public class Nivel1 extends JPanel implements Runnable{
                      | moneda1.getBounds().intersects(moneda2.getBounds())
                      | moneda1.getBounds().intersects(moneda3.getBounds())
                      ){
-                moneda1 = new Moneda(WIDTH + WIDTH/2);
+                moneda1 = new Moneda(WIDTH + WIDTH/2 + i++);
                 }    
             while(moneda2.getBounds().intersects(new Rectangle(0,HEIGHT - 100,800,84)) 
                     |moneda2.getBounds().intersects(wall.getBounds()) 
@@ -242,7 +224,7 @@ public class Nivel1 extends JPanel implements Runnable{
                     |moneda2.getBounds().intersects(moneda1.getBounds())
                     |moneda2.getBounds().intersects(moneda3.getBounds())
                     ){
-                moneda2 = new Moneda(WIDTH + WIDTH/2 + WIDTH/4);
+                moneda2 = new Moneda(WIDTH + WIDTH/2 + WIDTH/4+ i++);
                 }
             while(moneda3.getBounds().intersects(new Rectangle(0,HEIGHT - 100,800,84)) 
                     |moneda3.getBounds().intersects(wall.getBounds()) 
@@ -251,9 +233,9 @@ public class Nivel1 extends JPanel implements Runnable{
                     |moneda3.getBounds().intersects(moneda2.getBounds())
                     |moneda3.getBounds().intersects(moneda1.getBounds())
                     ){
-                moneda3 = new Moneda(WIDTH + WIDTH/2 +2*WIDTH/4);
+                moneda3 = new Moneda(WIDTH + WIDTH/2 +2*WIDTH/4 + i++);
                 }
-            int i=0;
+            
             while(
                     koopa2.getBounds().intersects(koopa1.getBounds())
                     | koopa2.getBounds().intersects(koopa3.getBounds())
@@ -271,7 +253,7 @@ public class Nivel1 extends JPanel implements Runnable{
                     koopa3.getBounds().intersects(koopa2.getBounds())
                     | koopa3.getBounds().intersects(koopa1.getBounds())
                     ){
-                koopa3 = new Koopa(WIDTH + (WIDTH / 2) + 50);
+                koopa3 = new Koopa(WIDTH + (WIDTH / 2) + 50 + i++);
             }       
         }
         public void procesarMonedas(){

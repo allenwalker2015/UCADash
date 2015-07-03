@@ -81,9 +81,10 @@ public final class Score extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Trebuchet MS", 1, 24)); // NOI18N
         jLabel1.setText("Score");
 
+        jTableDatos.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jTableDatos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -97,6 +98,7 @@ public final class Score extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTableDatos);
 
+        btnAceptarScore.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         btnAceptarScore.setText("Aceptar");
         btnAceptarScore.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

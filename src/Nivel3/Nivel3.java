@@ -1,4 +1,6 @@
 package Nivel3;
+import Login.Procesos.ACME;
+import Login.poo_login.login;
 import Nivel3.Graficos.Bat;
 import Nivel3.Graficos.Fondo;
 import Nivel3.Graficos.Link;
@@ -14,6 +16,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -25,8 +28,9 @@ public class Nivel3 extends JPanel implements Runnable{
 	public static int HEIGHT = 600;						
 	public static int WIDTH = 800;
         int vel;
+        boolean pause = false;
         public static int numscreen=0;
-        int GOAL= 7; //Se detiene una moneda antes
+        int GOAL= 7; 
         Fondo fondo;
 	Link personaje;	
         Bat bat1;
@@ -60,20 +64,36 @@ public class Nivel3 extends JPanel implements Runnable{
                     ImageIcon ii = new ImageIcon("Imagenes/win.jpg");
                     winflag = ii.getImage();
         }
+         static Image pp = null; {
+                ImageIcon ii = new ImageIcon("Imagenes/pause.jpg");
+                pp = ii.getImage();
+        }
         
         @Override
     public void run(){
                             while(!Win){
-                                try {
+                                if(!pause){
                                     repaint();                                                //Ejecuta el metodo de repintar del juego
+                                try {
                                     move();
                                     Thread.sleep(vel);
                                 } catch (InterruptedException ex) {
                                     Logger.getLogger(Nivel3.class.getName()).log(Level.SEVERE, null, ex);
                                     System.out.println("Error en el hilo :(");
                                 }
+                                }
                             }
-                            
+            try {
+                if(ACME.verificarScore3(login.name)<monedas){
+                    try {
+                        ACME.ActualizarScore3(monedas,login.name);
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(Nivel3.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(Nivel3.class.getName()).log(Level.SEVERE, null, ex);
+            }
                             
     }
 	
@@ -85,11 +105,16 @@ public class Nivel3 extends JPanel implements Runnable{
 	this.addMouseListener(new MouseAdapter(){
  
         @Override
-            public void mousePressed(MouseEvent arg0) {               
+            public void mousePressed(MouseEvent e) {
+                 if(e.getPoint().x >= 700 && e.getPoint().y >=20 && e.getPoint().x <= 760 && e.getPoint().y <= 80){
+                     pause = !pause;
+                 }
+                else{ 
 		personaje.jump(); 
                 Link.clicks++;
                 }
-               	});
+               }
+              });
 	}
         @SuppressWarnings("static-access")   
         public final void start(){
@@ -125,6 +150,7 @@ public class Nivel3 extends JPanel implements Runnable{
 	@SuppressWarnings("static-access")      
         @Override
 	public void paint(Graphics g){
+            if(!pause){
             super.paint(g);
             fondo.paint(g);
             moneda1.paint(g);               //dibuja una moneda aleatoria
@@ -145,7 +171,9 @@ public class Nivel3 extends JPanel implements Runnable{
             g.drawImage(rupy,20,70-50,null);
             g.drawString( "X"+ monedas + "  INTENTOS: " + intento,100-40,100-50);          //Muestra el contado de monedas
             g.drawString(deathMessage, scrollX+ 200,200);				//Muestra el mensaje de fiin del juego 
+            g.drawImage(pp, 700, 20, null);
             if(numscreen>8)g.drawImage(winflag,scrollX + 800,0,null);//Si gana se pinta la bandera
+            }
         }
         
 	@SuppressWarnings("static-access")
