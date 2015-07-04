@@ -200,7 +200,7 @@
                       <Font name="Trebuchet MS" size="12" style="0"/>
                     </Property>
                     <Property name="rows" type="int" value="5"/>
-                    <Property name="text" type="java.lang.String" value="En el nivel 2 se caracterizo c&#xf3;mo personaje a&#xa;Kirby, tambi&#xe9;n un cl&#xe1;sico de Nintendo, siendo&#xa;este el nivel medio, caracterizado por la velocidad&#xa;del nivel es m&#xe1;s r&#xe1;pida que el nivel anterior, para &#xa;jugar simplemente se presiona click izquierdo sobre&#xa;la pantalla del juego para que el personaje de un&#xa;salto y pueda recolectar las monedas, para este nivel &#xa;se requiere un m&#xed;nimo de 6 monedas para avanzar&#xa;el nivel, los obstaculos son diversos, entre ellos, &#xa;las caracteristicas nubes del cl&#xe1;sico juego y los&#xa;famosos birds. "/>
+                    <Property name="text" type="java.lang.String" value="En el nivel 2 se caracterizo c&#xf3;mo personaje a&#xa;Kirby, tambi&#xe9;n un cl&#xe1;sico de Nintendo, siendo&#xa;este el nivel medio, caracterizado por la velocidad&#xa;del nivel es m&#xe1;s r&#xe1;pida que el nivel anterior, para &#xa;jugar simplemente se presiona click izquierdo sobre&#xa;la pantalla del juego para que el personaje de un&#xa;salto y pueda recolectar las monedas, para este nivel &#xa;se requiere un m&#xed;nimo de 7 monedas para avanzar&#xa;el nivel, los obstaculos son diversos, entre ellos, &#xa;las caracteristicas nubes del cl&#xe1;sico juego y los&#xa;famosos birds. "/>
                   </Properties>
                 </Component>
               </SubComponents>

@@ -15,7 +15,7 @@ public class PhantomBlue {
 	Random rnd = new Random();						//Genera el rand
 	public int x ;                                                          //Posicion en X del Koopa
 	int initX;                                                              //Posicion inicial en X del Koopa
-        int y = rnd.nextInt(400);                                               //Setea la posicion en Y aleatoreamente
+        int y = rnd.nextInt(500);                                               //Setea la posicion en Y aleatoreamente
 	public static int speed = - 6;						//Velocidad de desplazamiento
 	int WIDTH = 30;                                                         //Ancho del personaje 
 	int height = 30;                                                        //Alto del personaje
@@ -54,7 +54,7 @@ public class PhantomBlue {
                 if(Nivel4.numscreen < 8){
 		if (x <= 0 - WIDTH){
 			x= initX;
-			y = rnd.nextInt(400);
+			y = rnd.nextInt(500);
 			
 		}}
 	}

@@ -161,7 +161,7 @@ public class Nivel4 extends JPanel implements Runnable{
 //            g.drawImage(floor, scrollX+(2* 677) ,HEIGHT - 84, null);  //dibuja el piso
             g.setColor(Color.white);
             g.setFont(new Font("arial", Font.PLAIN, 30));//Asigna el tipo de fuente a usar en los textos 
-            g.drawImage(rupy,20,70-50,null);
+            g.drawImage(rupy,15,10,null);
             g.drawString( "X"+ monedas + "  INTENTOS: " + intento,100-40,100-50);          //Muestra el contado de monedas
             g.drawString(deathMessage, scrollX+ 200,200);				//Muestra el mensaje de fiin del juego 
             g.drawImage(pp, 700, 20, null);

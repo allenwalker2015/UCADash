@@ -102,7 +102,7 @@ public class Info extends javax.swing.JFrame {
         jTextArea2.setColumns(20);
         jTextArea2.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jTextArea2.setRows(5);
-        jTextArea2.setText("En el nivel 2 se caracterizo cómo personaje a\nKirby, también un clásico de Nintendo, siendo\neste el nivel medio, caracterizado por la velocidad\ndel nivel es más rápida que el nivel anterior, para \njugar simplemente se presiona click izquierdo sobre\nla pantalla del juego para que el personaje de un\nsalto y pueda recolectar las monedas, para este nivel \nse requiere un mínimo de 6 monedas para avanzar\nel nivel, los obstaculos son diversos, entre ellos, \nlas caracteristicas nubes del clásico juego y los\nfamosos birds. ");
+        jTextArea2.setText("En el nivel 2 se caracterizo cómo personaje a\nKirby, también un clásico de Nintendo, siendo\neste el nivel medio, caracterizado por la velocidad\ndel nivel es más rápida que el nivel anterior, para \njugar simplemente se presiona click izquierdo sobre\nla pantalla del juego para que el personaje de un\nsalto y pueda recolectar las monedas, para este nivel \nse requiere un mínimo de 7 monedas para avanzar\nel nivel, los obstaculos son diversos, entre ellos, \nlas caracteristicas nubes del clásico juego y los\nfamosos birds. ");
         jScrollPane2.setViewportView(jTextArea2);
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
