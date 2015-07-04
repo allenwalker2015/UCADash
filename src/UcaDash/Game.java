@@ -36,7 +36,7 @@ import javax.swing.JFrame;
                 CardLayout cardLayout = new CardLayout();
                 contentPane.setLayout(cardLayout);
                 final Menu menu = new Menu();							//the menu used in each instance
-		final Nivel4 level1 = new Nivel4(10);
+		final Nivel1 level1 = new Nivel1(25);
                 level1.sound.stop1();
                 final Nivel2 level2 = new Nivel2(20);
                 level2.sound.stop1();
